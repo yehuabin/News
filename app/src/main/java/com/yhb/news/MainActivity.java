@@ -1,96 +1,50 @@
 package com.yhb.news;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.yhb.news.adapter.TouTiaoAdapter;
-import com.yhb.news.model.TouTiao;
+import com.yhb.news.adapter.TouTiaoViewPagerAdapter;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+
+import static android.support.design.widget.TabLayout.MODE_SCROLLABLE;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.toutiao_list)
-    RecyclerView toutiao_list;
+    @BindView(R.id.toutiao_tab)
+    TabLayout toutiao_tab;
 
-    @BindView(R.id.toutiao_swipe)
-    SwipeRefreshLayout toutiao_swip;
-    OkHttpClient okHttpClient = new OkHttpClient();
+    @BindView(R.id.toutiao_viewpager)
+    ViewPager toutiao_viewpager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        List<String> data = new ArrayList<String>();
+        data.add("头条");
+        data.add("社会");
+        data.add("国内");
+        data.add("国际");
+        data.add("娱乐");
+        data.add("体育");
+        data.add("军事");
+        data.add("科技");
+        data.add("财经");
+        data.add("时尚");
 
-        String url = "http://v.juhe.cn/toutiao/index?type=&key=2e4d0cd4db3d8879e0cacad7afca0bf3";
-       final Request request = new Request.Builder().url(url).build();
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
-        toutiao_list.setItemAnimator(new DefaultItemAnimator());
-        toutiao_list.setLayoutManager(linearLayoutManager);
-        toutiao_swip.setColorSchemeResources(android.R.color.holo_red_light,android.R.color.holo_blue_bright,android.R.color.holo_green_light);
-        toutiao_swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                okHttpClient.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        toutiao_swip.setRefreshing(false);
-                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        String json = response.body().string();
-                        Gson gson =new Gson();
-                        final TouTiao touTiao=  gson.fromJson(json, TouTiao.class);
-                        MainActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                TouTiaoAdapter adapter=new TouTiaoAdapter(MainActivity.this,touTiao);
-                                toutiao_list.setAdapter(adapter);
-                            }
-                        });
-                        toutiao_swip.setRefreshing(false);
-                    }
-                });
-            }
-        });
-
-
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String json = response.body().string();
-                Gson gson =new Gson();
-                final TouTiao touTiao=  gson.fromJson(json, TouTiao.class);
-                MainActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        TouTiaoAdapter adapter=new TouTiaoAdapter(MainActivity.this,touTiao);
-                        toutiao_list.setAdapter(adapter);
-                    }
-                });
-            }
-        });
+        toutiao_tab.setTabMode(MODE_SCROLLABLE);
+        TouTiaoViewPagerAdapter adapter = new TouTiaoViewPagerAdapter(getSupportFragmentManager(), this, data);
+        toutiao_viewpager.setAdapter(adapter);
+        toutiao_tab.setupWithViewPager(toutiao_viewpager);
 
 
     }
