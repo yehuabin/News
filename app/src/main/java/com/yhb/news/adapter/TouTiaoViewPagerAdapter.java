@@ -1,6 +1,7 @@
 package com.yhb.news.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -34,6 +35,9 @@ public class TouTiaoViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Fragment fragment=new TouTiaoFragment();
+        Bundle bundle=new Bundle();
+        bundle.putString("type",data.get(position));
+        fragment.setArguments(bundle);
         return fragment;
     }
 }
