@@ -70,14 +70,13 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHold
         final TouTiao.ResultBean.DataBean item = data.get(position);
         holder.title.setText(item.getTitle());
         holder.author.setText(item.getAuthor_name());
-        holder.category.setText(item.getCategory());
         holder.date.setText(item.getDate());
        // new ImageService(holder.thumb).execute(item.getThumbnail_pic_s());
         holder.itemView.setTag(item.getUrl());
 
         Glide.with(holder.itemView.getContext()).load(item.getThumbnail_pic_s())
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .placeholder(R.mipmap.ic_launcher).crossFade().into(holder.thumb);
+                .placeholder(R.mipmap.image_loading).crossFade().into(holder.thumb);
 //        AsyncTask<Void, Void, Bitmap> asyncTask =  new AsyncTask<Void, Void, Bitmap>() {
 //            @Override
 //            protected Bitmap doInBackground(Void... params) {
@@ -114,16 +113,13 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHold
 
         TextView title;
         TextView date;
-        TextView category;
         TextView author;
-
         ImageView thumb;
 
         public ViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.tv_title);
             date = (TextView) itemView.findViewById(R.id.tv_date);
-            category = (TextView) itemView.findViewById(R.id.tv_category);
             author = (TextView) itemView.findViewById(R.id.tv_author);
             thumb = (ImageView) itemView.findViewById(R.id.iv_thumb);
         }

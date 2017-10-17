@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.yhb.news.utils.TouTiaoType;
+
 import java.util.List;
 
 /**
@@ -20,6 +22,7 @@ public class TouTiaoViewPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         this.context = context;
         this.data=data;
+
     }
 
     @Override
@@ -29,7 +32,7 @@ public class TouTiaoViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return data.get(position);
+        return TouTiaoType.GetVal( data.get(position));
     }
 
     @Override

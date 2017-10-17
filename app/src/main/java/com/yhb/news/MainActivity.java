@@ -29,18 +29,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
         ButterKnife.bind(this);
         List<String> data = new ArrayList<String>();
-        data.add("头条");
-        data.add("社会");
-        data.add("国内");
-        data.add("国际");
-        data.add("娱乐");
-        data.add("体育");
-        data.add("军事");
-        data.add("科技");
-        data.add("财经");
-        data.add("时尚");
+        data.add("top");
+        data.add("shehui");
+        data.add("guonei");
+        data.add("guoji");
+        data.add("yule");
+        data.add("tiyu");
+        data.add("junshi");
+        data.add("keji");
+        data.add("caijing");
+        data.add("shishang");
         toutiao_tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
