@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import com.google.gson.Gson;
 import com.yhb.news.R;
 import com.yhb.news.model.TouTiao;
+import com.yhb.news.utils.LineDecoration;
 
 import java.io.IOException;
 
@@ -53,6 +54,7 @@ public class TouTiaoFragment extends Fragment {
         final Request request = new Request.Builder().url(url).build();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(inflater.getContext());
         toutiao_list.setItemAnimator(new DefaultItemAnimator());
+        toutiao_list.addItemDecoration(new LineDecoration(inflater.getContext(),LineDecoration.VERTICAL_LIST));
         toutiao_list.setLayoutManager(linearLayoutManager);
         toutiao_swip.setColorSchemeResources(android.R.color.holo_red_light, android.R.color.holo_blue_bright, android.R.color.holo_green_light);
         toutiao_swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
