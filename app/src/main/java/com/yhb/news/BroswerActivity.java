@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -37,9 +38,12 @@ public class BroswerActivity extends AppCompatActivity implements View.OnTouchLi
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("");
 
+
         WebView webView = (WebView) findViewById(R.id.webView);
         Bundle bundle = getIntent().getExtras();
         webView.loadUrl(bundle.getString("url"));
+        WebSettings webSettings=webView.getSettings();
+        webSettings.setJavaScriptEnabled(false);
         webView.setWebViewClient(new WebViewClient() {
             //覆盖shouldOverrideUrlLoading 方法
             @Override

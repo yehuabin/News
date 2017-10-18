@@ -14,7 +14,8 @@
         <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".BroswerActivity"></activity>
+        <activity android:name=".BroswerActivity"
+            android:theme="@style/CustomActionBarTheme"></activity>
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
