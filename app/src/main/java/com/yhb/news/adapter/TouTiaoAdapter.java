@@ -103,7 +103,6 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHold
 
     }
 
-
     @Override
     public int getItemCount() {
         return data.size();

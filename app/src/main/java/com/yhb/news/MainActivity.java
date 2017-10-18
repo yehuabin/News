@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import com.yhb.news.adapter.TouTiaoViewPagerAdapter;
+import com.yhb.news.utils.TouTiaoType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.getText();
-                Log.d("tabselect", "onTabSelected: "+tab.getText());
             }
 
             @Override
@@ -66,10 +68,15 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i=0;i<toutiao_tab.getTabCount();i++){
             TabLayout.Tab tab=toutiao_tab.getTabAt(i);
-
+            //tab.setCustomView(getTabView(i,data));
         }
+    }
 
+    private View getTabView(int position,List<String> data){
+        View view= LayoutInflater.from(getBaseContext()).inflate(R.layout.toutiao_tab,null);
+       TextView textView= (TextView) view.findViewById(R.id.text_title);
+        textView.setText(TouTiaoType.GetVal( data.get(position)));
 
-
+        return view;
     }
 }

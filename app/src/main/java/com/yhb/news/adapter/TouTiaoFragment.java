@@ -61,7 +61,7 @@ public class TouTiaoFragment extends Fragment {
             @Override
             public void onRefresh() {
                 loadData(view,request);
-                toutiao_swip.setRefreshing(false);
+
             }
         });
 
@@ -88,6 +88,9 @@ public class TouTiaoFragment extends Fragment {
                         toutiao_list.setAdapter(adapter);
                         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.line_progress);
                         linearLayout.setVisibility(View.GONE);
+                        if (toutiao_swip.isRefreshing()){
+                            toutiao_swip.setRefreshing(false);
+                        }
                     }
                 };
                 new Thread() {
