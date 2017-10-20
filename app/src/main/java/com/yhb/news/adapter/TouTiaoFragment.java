@@ -8,7 +8,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,9 @@ import com.yhb.news.utils.LineDecoration;
 
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -29,38 +31,41 @@ import okhttp3.Response;
 
 public class TouTiaoFragment extends Fragment {
     private static final String TAG = "TouTiaoFragment";
+    @BindView(R.id.toutiao_list)
     RecyclerView toutiao_list;
-
-    Handler handler = new Handler();
+    @BindView(R.id.toutiao_swipe)
     SwipeRefreshLayout toutiao_swip;
+    Handler handler = new Handler();
+
 
     OkHttpClient okHttpClient = new OkHttpClient();
+    private Unbinder unbinder;
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         String type = bundle.getString("type");
-        Log.d(TAG, "onCreateView: " + type);
-        final View view;
+        final View view= inflater.inflate(R.layout.toutiao_fragment, null);
         String url = "http://v.juhe.cn/toutiao/index?type=" + type + "&key=2e4d0cd4db3d8879e0cacad7afca0bf3";
 
-        view = inflater.inflate(R.layout.toutiao_fragment, null);
-
-        toutiao_list = (RecyclerView) view.findViewById(R.id.toutiao_list);
-        toutiao_swip = (SwipeRefreshLayout) view.findViewById(R.id.toutiao_swipe);
-
-
+        unbinder = ButterKnife.bind(this, view);
         final Request request = new Request.Builder().url(url).build();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(inflater.getContext());
         toutiao_list.setItemAnimator(new DefaultItemAnimator());
-        toutiao_list.addItemDecoration(new LineDecoration(inflater.getContext(),LineDecoration.VERTICAL_LIST));
+        toutiao_list.addItemDecoration(new LineDecoration(inflater.getContext(), LineDecoration.VERTICAL_LIST));
         toutiao_list.setLayoutManager(linearLayoutManager);
         toutiao_swip.setColorSchemeResources(android.R.color.holo_red_light, android.R.color.holo_blue_bright, android.R.color.holo_green_light);
         toutiao_swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadData(view,request);
+                loadData(view, request);
 
             }
         });
@@ -88,7 +93,7 @@ public class TouTiaoFragment extends Fragment {
                         toutiao_list.setAdapter(adapter);
                         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.line_progress);
                         linearLayout.setVisibility(View.GONE);
-                        if (toutiao_swip.isRefreshing()){
+                        if (toutiao_swip.isRefreshing()) {
                             toutiao_swip.setRefreshing(false);
                         }
                     }

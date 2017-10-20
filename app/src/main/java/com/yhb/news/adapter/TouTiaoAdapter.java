@@ -2,7 +2,6 @@ package com.yhb.news.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -52,20 +51,10 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHold
         return viewHolder;
     }
 
-    @Override
-    public void onViewRecycled(ViewHolder holder) {
-        super.onViewRecycled(holder);
-        if (holder.thumb.getTag(R.id.tag_asyc) instanceof AsyncTask)
-        {
-//            AsyncTask asyncTask= (AsyncTask<Void, Void, Bitmap>) holder.thumb.getTag(R.id.tag_asyc);
-//            asyncTask.cancel(true);
-//            Log.d(TAG, "onViewRecycled: ");
-        }
-    }
+
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        //holder.thumb.setImageResource((R.mipmap.ic_launcher));
 
         final TouTiao.ResultBean.DataBean item = data.get(position);
         holder.title.setText(item.getTitle());
@@ -76,30 +65,7 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHold
 
         Glide.with(holder.itemView.getContext()).load(item.getThumbnail_pic_s())
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .placeholder(R.mipmap.image_loading).crossFade().into(holder.thumb);
-//        AsyncTask<Void, Void, Bitmap> asyncTask =  new AsyncTask<Void, Void, Bitmap>() {
-//            @Override
-//            protected Bitmap doInBackground(Void... params) {
-//                try {
-//                    URL url = new URL(item.getThumbnail_pic_s());
-//                    Bitmap bitmap = BitmapFactory.decodeStream(url.openStream());
-//                    return bitmap;
-//                } catch (MalformedURLException e) {
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                return null;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Bitmap bitmap) {
-//                super.onPostExecute(bitmap);
-//                holder.thumb.setImageBitmap(bitmap);
-//            }
-//        };
-//        holder.thumb.setTag(R.id.tag_asyc,asyncTask);
-//        asyncTask.execute();
+                .placeholder(R.drawable.loading).dontAnimate().into(holder.thumb);
 
     }
 
