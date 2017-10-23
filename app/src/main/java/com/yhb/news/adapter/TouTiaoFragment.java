@@ -16,13 +16,19 @@ import android.widget.LinearLayout;
 import com.google.gson.Gson;
 import com.yhb.news.R;
 import com.yhb.news.model.TouTiao;
+import com.yhb.news.model.TouTiaoBmob;
 import com.yhb.news.utils.LineDecoration;
 
 import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -51,8 +57,9 @@ public class TouTiaoFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Bundle bundle = getArguments();
-        String type = bundle.getString("type");
-        final View view= inflater.inflate(R.layout.toutiao_fragment, null);
+        final String type = bundle.getString("type");
+
+        final View view = inflater.inflate(R.layout.toutiao_fragment, null);
         String url = "http://v.juhe.cn/toutiao/index?type=" + type + "&key=2e4d0cd4db3d8879e0cacad7afca0bf3";
 
         unbinder = ButterKnife.bind(this, view);
@@ -65,31 +72,31 @@ public class TouTiaoFragment extends Fragment {
         toutiao_swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadData(view, request);
+                loadData(type, view);
 
             }
         });
 
-        loadData(view, request);
+        loadData(type, view);
+
+        // loadData(view, request);
 
         return view;
     }
 
-    private void loadData(final View view, Request request) {
-        okHttpClient.newCall(request).enqueue(new Callback() {
+    private void loadData(String type, final View view) {
+        BmobQuery<TouTiaoBmob> query = new BmobQuery<>();
+        query.addWhereEqualTo("category", type);
+        query.setLimit(10);
+        query.findObjects(new FindListener<TouTiaoBmob>() {
             @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String json = response.body().string();
-                Gson gson = new Gson();
-                final TouTiao touTiao = gson.fromJson(json, TouTiao.class);
+            public void done(final List<TouTiaoBmob> list, BmobException e) {
+                if (list == null) {
+                    return;
+                }
                 final Runnable mRunnable = new Runnable() {
                     public void run() {
-                        TouTiaoAdapter adapter = new TouTiaoAdapter(view.getContext(), touTiao);
+                        TouTiaoAdapter adapter = new TouTiaoAdapter(view.getContext(), list);
                         toutiao_list.setAdapter(adapter);
                         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.line_progress);
                         linearLayout.setVisibility(View.GONE);
@@ -104,6 +111,46 @@ public class TouTiaoFragment extends Fragment {
                         handler.post(mRunnable);
                     }
                 }.start();
+            }
+        });
+    }
+
+    private void loadData(final View view, Request request) {
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String json = response.body().string();
+                Gson gson = new Gson();
+                final TouTiao touTiao = gson.fromJson(json, TouTiao.class);
+                //写入bmob云数据库
+                final List<TouTiao.ResultBean.DataBean> data = touTiao.getResult().getData();
+
+                for (int i = 0; i < data.size(); i++) {
+                    final TouTiao.ResultBean.DataBean bean = data.get(i);
+                    final TouTiaoBmob touTiaoBmob = new TouTiaoBmob();
+                    touTiaoBmob.setAuthor_name(bean.getAuthor_name());
+                    touTiaoBmob.setCategory(bean.getCategory() == "" ? "时尚" : bean.getCategory());
+                    touTiaoBmob.setDate(bean.getDate());
+                    touTiaoBmob.setThumbnail_pic_s(bean.getThumbnail_pic_s());
+                    touTiaoBmob.setThumbnail_pic_s02(bean.getThumbnail_pic_s02());
+                    touTiaoBmob.setThumbnail_pic_s03(bean.getThumbnail_pic_s03());
+                    touTiaoBmob.setTitle(bean.getTitle());
+                    touTiaoBmob.setUrl(bean.getUrl());
+                    touTiaoBmob.setUniquekey(bean.getUniquekey());
+                    touTiaoBmob.save(new SaveListener<String>() {
+                        @Override
+                        public void done(String s, BmobException e) {
+
+                        }
+                    });
+                }
+
+
             }
         });
     }

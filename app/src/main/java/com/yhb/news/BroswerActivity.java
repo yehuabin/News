@@ -3,7 +3,6 @@ package com.yhb.news;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -13,7 +12,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class BroswerActivity extends AppCompatActivity implements View.OnTouchListener {
+public class BroswerActivity extends BaseActivity implements View.OnTouchListener {
     private static final String TAG = "BroswerActivity";
     //手指向右滑动时的最小速度
     private static final int XSPEED_MIN = 200;

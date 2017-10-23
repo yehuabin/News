@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.yhb.news.BroswerActivity;
 import com.yhb.news.R;
-import com.yhb.news.model.TouTiao;
+import com.yhb.news.model.TouTiaoBmob;
 
 import java.util.List;
 
@@ -23,13 +23,13 @@ import java.util.List;
  */
 
 public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHolder> {
-    TouTiao result;
-    LayoutInflater inflater;
-    List<TouTiao.ResultBean.DataBean> data;
 
-    public TouTiaoAdapter(Context context, TouTiao result) {
-        this.result = result;
-        data = result.getResult().getData();
+    LayoutInflater inflater;
+    List<TouTiaoBmob> data;
+
+    public TouTiaoAdapter(Context context, List<TouTiaoBmob> data) {
+
+       this.data=data;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -56,7 +56,7 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        final TouTiao.ResultBean.DataBean item = data.get(position);
+        final TouTiaoBmob item = data.get(position);
         holder.title.setText(item.getTitle());
         holder.author.setText(item.getAuthor_name());
         holder.date.setText(item.getDate());
