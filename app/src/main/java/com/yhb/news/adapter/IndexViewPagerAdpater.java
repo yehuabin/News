@@ -28,6 +28,7 @@ public class IndexViewPagerAdpater extends FragmentPagerAdapter {
         data=new ArrayList<>();
         data.add("资讯");
         data.add("笑话");
+        data.add("美女");
     }
 
     @Override
@@ -59,6 +60,12 @@ public class IndexViewPagerAdpater extends FragmentPagerAdapter {
                 imageView.setImageResource(R.drawable.tab2);
                 imageView.setTag(R.id.img_unselected,R.drawable.tab2);
                 imageView.setTag(R.id.img_selected,R.drawable.tab2_selected);
+
+                break;
+            case 2:
+                imageView.setImageResource(R.drawable.tab3);
+                imageView.setTag(R.id.img_unselected,R.drawable.tab3);
+                imageView.setTag(R.id.img_selected,R.drawable.tab3_selected);
 
                 break;
             default:

@@ -60,10 +60,11 @@ public class TouTiaoFragment extends Fragment {
         final String type = bundle.getString("type");
 
         final View view = inflater.inflate(R.layout.toutiao_fragment, null);
-        String url = "http://v.juhe.cn/toutiao/index?type=" + type + "&key=2e4d0cd4db3d8879e0cacad7afca0bf3";
+       // String url = "http://v.juhe.cn/toutiao/index?type=" + type + "&key=2e4d0cd4db3d8879e0cacad7afca0bf3";
+        //final Request request = new Request.Builder().url(url).build();
 
         unbinder = ButterKnife.bind(this, view);
-        final Request request = new Request.Builder().url(url).build();
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(inflater.getContext());
         toutiao_list.setItemAnimator(new DefaultItemAnimator());
         toutiao_list.addItemDecoration(new LineDecoration(inflater.getContext(), LineDecoration.VERTICAL_LIST));
