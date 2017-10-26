@@ -1,5 +1,6 @@
 package com.yhb.news.adapter;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -65,16 +66,11 @@ public class IndexFragment extends Fragment {
             view=inflater.inflate(R.layout.index_1,null);
             unbinder= ButterKnife.bind(this,view);
             List<String> data = new ArrayList<String>();
-            data.add("top");
-            data.add("shehui");
-            data.add("guonei");
-            data.add("guoji");
-            data.add("yule");
-            data.add("tiyu");
-            data.add("junshi");
-            data.add("keji");
-            data.add("caijing");
-            data.add("shishang");
+            Integer i=-1;
+            while (i<19){
+                data.add(i.toString());
+                i++;
+            }
             toutiao_tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
@@ -98,15 +94,25 @@ public class IndexFragment extends Fragment {
         }
         else if(position==1) {
             view=inflater.inflate(R.layout.index_2,null);
+
             //http://www.laifudao.com/api.asp
         }
         else {
             view=inflater.inflate(R.layout.index_3,null);
-            StaggeredGridLayoutManager staggeredGridLayoutManager=new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL);
+            final StaggeredGridLayoutManager staggeredGridLayoutManager=new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL);
             staggeredGridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
             final RecyclerView rv_meinv= (RecyclerView) view.findViewById(R.id.rv_meinv);
             rv_meinv.setLayoutManager(staggeredGridLayoutManager);
+            rv_meinv.setHasFixedSize(true);
+            rv_meinv.addItemDecoration(new SpaceItemDecoration(8));
 
+            rv_meinv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    staggeredGridLayoutManager.invalidateSpanAssignments();
+                }
+            });
             String url="http://route.showapi.com/1208-2?showapi_appid=48278&showapi_sign=8e890585f9634beda7ac94a10a2c0142&type=1&rows=50&page=1";
             Request request=new Request.Builder().url(url).build();
             OkHttpClient okHttpClient=new OkHttpClient();
@@ -144,4 +150,43 @@ public class IndexFragment extends Fragment {
 
         return view;
     }
+}
+ class SpaceItemDecoration extends RecyclerView.ItemDecoration{
+     int mSpace;
+
+     /**
+      * Retrieve any offsets for the given item. Each field of <code>outRect</code> specifies
+      * the number of pixels that the item view should be inset by, similar to padding or margin.
+      * The default implementation sets the bounds of outRect to 0 and returns.
+      * <p>
+      * <p>
+      * If this ItemDecoration does not affect the positioning of item views, it should set
+      * all four fields of <code>outRect</code> (left, top, right, bottom) to zero
+      * before returning.
+      * <p>
+      * <p>
+      * If you need to access Adapter for additional data, you can call
+      * {@link RecyclerView#getChildAdapterPosition(View)} to get the adapter position of the
+      * View.
+      *
+      * @param outRect Rect to receive the output.
+      * @param view    The child view to decorate
+      * @param parent  RecyclerView this ItemDecoration is decorating
+      * @param state   The current state of RecyclerView.
+      */
+     @Override
+     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+         super.getItemOffsets(outRect, view, parent, state);
+         outRect.left = mSpace;
+         outRect.right = mSpace;
+         outRect.bottom = mSpace;
+         if (parent.getChildAdapterPosition(view) == 0) {
+             outRect.top = mSpace;
+         }
+
+     }
+
+     public SpaceItemDecoration(int space) {
+         this.mSpace = space;
+     }
 }

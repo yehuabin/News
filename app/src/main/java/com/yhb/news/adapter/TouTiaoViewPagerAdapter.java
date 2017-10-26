@@ -39,7 +39,13 @@ public class TouTiaoViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment=new TouTiaoFragment();
         Bundle bundle=new Bundle();
-        bundle.putString("type",TouTiaoType.GetVal(data.get(position)));
+        if (position==0){
+            position=-1;
+        }
+        else {
+            position--;
+        }
+        bundle.putString("type",String.valueOf(position));
         fragment.setArguments(bundle);
         return fragment;
     }

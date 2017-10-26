@@ -11,10 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.yhb.news.BroswerActivity;
 import com.yhb.news.R;
-import com.yhb.news.model.TouTiaoBmob;
+import com.yhb.news.model.TouTiao;
 
 import java.util.List;
 
@@ -25,9 +24,9 @@ import java.util.List;
 public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHolder> {
 
     LayoutInflater inflater;
-    List<TouTiaoBmob> data;
+    List<TouTiao.ShowapiResBodyBean.PagebeanBean.ContentlistBean> data;
 
-    public TouTiaoAdapter(Context context, List<TouTiaoBmob> data) {
+    public TouTiaoAdapter(Context context, List<TouTiao.ShowapiResBodyBean.PagebeanBean.ContentlistBean> data) {
 
        this.data=data;
         this.inflater = LayoutInflater.from(context);
@@ -44,7 +43,6 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHold
                 bundle.putString("url",v.getTag().toString());
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
-                //Toast.makeText(v.getContext(), ""+v.getTag(), Toast.LENGTH_SHORT).show();
             }
         });
         ViewHolder viewHolder = new ViewHolder(view);
@@ -56,16 +54,16 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        final TouTiaoBmob item = data.get(position);
+        final TouTiao.ShowapiResBodyBean.PagebeanBean.ContentlistBean item = data.get(position);
         holder.title.setText(item.getTitle());
-        holder.author.setText(item.getAuthor_name());
+        holder.author.setText(item.getTypeName()+item.getDate());
         holder.date.setText(item.getDate());
        // new ImageService(holder.thumb).execute(item.getThumbnail_pic_s());
         holder.itemView.setTag(item.getUrl());
 
-        Glide.with(holder.itemView.getContext()).load(item.getThumbnail_pic_s())
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .placeholder(R.drawable.loading).dontAnimate().into(holder.thumb);
+        Glide.with(holder.itemView.getContext()).load(item.getUserLogo_code())
+
+               .into(holder.thumb);
 
     }
 

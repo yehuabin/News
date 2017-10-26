@@ -9,157 +9,273 @@ import java.util.List;
 public class TouTiao {
 
     /**
-     * reason : 成功的返回
-     * result : {"stat":"1","data":[{"uniquekey":"fe5f175d18d270e3709e16be1820f21c","title":"特朗普这回把全世界都得罪了，再次任性退出一国际组织！","date":"2017-10-13 09:18","category":"头条","author_name":"第一军情","url":"http://mini.eastday.com/mobile/171013091839383.html","thumbnail_pic_s":"http://09.imgmini.eastday.com/mobile/20171013/20171013_a74c903b43c5cca3bd26a5674623b5d5_cover_mwpm_03200403.jpg","thumbnail_pic_s02":"http://09.imgmini.eastday.com/mobile/20171013/20171013_e622f1d431640a796bc609bd52c0d37a_cover_mwpm_03200403.jpg","thumbnail_pic_s03":"http://09.imgmini.eastday.com/mobile/20171013/20171013_bac76f3ff6d2ca362fd5f27b8f29e01e_cover_mwpm_03200403.jpg"},{"uniquekey":"33ff9a50f8f20d4901c472c3d82e651c","title":"告别老房喜迁新居 济南城中村丁家庄大变样","date":"2017-10-13 09:06","category":"头条","author_name":"山东商报","url":"http://mini.eastday.com/mobile/171013090616370.html","thumbnail_pic_s":"http://06.imgmini.eastday.com/mobile/20171013/20171013090616_d41d8cd98f00b204e9800998ecf8427e_1_mwpm_03200403.jpg","thumbnail_pic_s02":"http://06.imgmini.eastday.com/mobile/20171013/20171013090616_d41d8cd98f00b204e9800998ecf8427e_2_mwpm_03200403.jpg","thumbnail_pic_s03":"http://06.imgmini.eastday.com/mobile/20171013/20171013090616_d41d8cd98f00b204e9800998ecf8427e_4_mwpm_03200403.jpg"},{"uniquekey":"f866b7cb832e9965bb89346ee250cf09","title":"广东省正厅级干部李进明涉嫌受贿罪被立案侦查","date":"2017-10-13 09:05","category":"头条","author_name":"人民网","url":"http://mini.eastday.com/mobile/171013090541583.html","thumbnail_pic_s":"http://04.imgmini.eastday.com/mobile/20171013/20171013090541_ba53aca791ce46231b79f31bad0c893c_1_mwpm_03200403.jpg"},{"uniquekey":"17679ee29b4f1e04a34e83c4918fc4c0","title":"章子怡出席活动精致夺目 造型贵气又俏皮","date":"2017-10-13 08:52","category":"头条","author_name":"新华网","url":"http://mini.eastday.com/mobile/171013085240489.html","thumbnail_pic_s":"http://09.imgmini.eastday.com/mobile/20171013/20171013085240_2930c8137e77025a747afdfede832f09_1_mwpm_03200403.jpg","thumbnail_pic_s02":"http://09.imgmini.eastday.com/mobile/20171013/20171013085240_ea3b0b00c49e33c677dd8ea870c53c11_2_mwpm_03200403.jpg","thumbnail_pic_s03":"http://09.imgmini.eastday.com/mobile/20171013/20171013085240_322a55e54533f3fc3e49169d8e9e9668_3_mwpm_03200403.jpg"},{"uniquekey":"3d80bc2491e556be2fa18af8dc0d2f79","title":"家中洗衣机有异动：藏了条52斤大蟒蛇","date":"2017-10-13 08:44","category":"头条","author_name":"重庆晨报","url":"http://mini.eastday.com/mobile/171013084447830.html","thumbnail_pic_s":"http://05.imgmini.eastday.com/mobile/20171013/20171013084447_2f991e234f8851cdd428b987a27ceee2_2_mwpm_03200403.jpg","thumbnail_pic_s02":"http://05.imgmini.eastday.com/mobile/20171013/20171013084447_2f991e234f8851cdd428b987a27ceee2_4_mwpm_03200403.jpg","thumbnail_pic_s03":"http://05.imgmini.eastday.com/mobile/20171013/20171013084447_2f991e234f8851cdd428b987a27ceee2_1_mwpm_03200403.jpg"},{"uniquekey":"7e3e4ced2d67c4acb527802be028564f","title":"伦敦大学专家帕尔多：对未来五年的中国充满期待","date":"2017-10-13 08:36","category":"头条","author_name":"人民网","url":"http://mini.eastday.com/mobile/171013083602763.html","thumbnail_pic_s":"http://03.imgmini.eastday.com/mobile/20171013/20171013083602_a4c6f0ba555ecf953c0cb23afe91666f_1_mwpm_03200403.jpg"},{"uniquekey":"e4488dc16dd7cd94d4ac27f745c2592e","title":"24小时内离开！ 杜特尔特不满外国批扫毒 对使节下逐客令","date":"2017-10-13 08:23","category":"头条","author_name":"环球网","url":"http://mini.eastday.com/mobile/171013082352981.html","thumbnail_pic_s":"http://01.imgmini.eastday.com/mobile/20171013/20171013082352_e3bfdda97132eb7328c066d189d73784_1_mwpm_03200403.jpg"},{"uniquekey":"a3d76bed1ff83d561532f094f015b8f9","title":"澳大利亚隐形战机等敏感数据失窃，政府回应称并无风险","date":"2017-10-13 08:23","category":"头条","author_name":"新华网","url":"http://mini.eastday.com/mobile/171013082343937.html","thumbnail_pic_s":"http://00.imgmini.eastday.com/mobile/20171013/20171013082343_4dc12baa6769a756e85bb45eca94c7c1_1_mwpm_03200403.jpg"},{"uniquekey":"37a21beeca08b913e8c220b1b5f83523","title":"女大学生获评国际手模大赛十佳手模 睡觉都不能脱手套","date":"2017-10-13 08:07","category":"头条","author_name":"楚天金报","url":"http://mini.eastday.com/mobile/171013080722557.html","thumbnail_pic_s":"http://04.imgmini.eastday.com/mobile/20171013/20171013080722_caa75ff8e27c150267ccc4fb5378ba4a_1_mwpm_03200403.jpg"},{"uniquekey":"5918d4bf6bf621752a4fb70bb234d3c2","title":"74名电信网络诈骗犯罪嫌疑人被押解回国","date":"2017-10-13 08:05","category":"头条","author_name":"新华网","url":"http://mini.eastday.com/mobile/171013080543802.html","thumbnail_pic_s":"http://07.imgmini.eastday.com/mobile/20171013/20171013080543_b404ce5d03fcbb1850d68222f2d7d31a_2_mwpm_03200403.jpg","thumbnail_pic_s02":"http://07.imgmini.eastday.com/mobile/20171013/20171013080543_3bb89b84ab193d8372c14bfa64d38a2f_4_mwpm_03200403.jpg","thumbnail_pic_s03":"http://07.imgmini.eastday.com/mobile/20171013/20171013080543_5d568501ad12c3aaff6a7ebdc6dcca1e_1_mwpm_03200403.jpg"},{"uniquekey":"86444e0d85c7d6422528003bb14c16f1","title":"斯里兰卡全国铁路大罢工 乘客\u201c挂火车\u201d人满为患","date":"2017-10-13 08:03","category":"头条","author_name":"环球网","url":"http://mini.eastday.com/mobile/171013080330846.html","thumbnail_pic_s":"http://08.imgmini.eastday.com/mobile/20171013/20171013080330_3a5ee6c3be32f0b2eb8b5fe43e70aa31_4_mwpm_03200403.jpg","thumbnail_pic_s02":"http://08.imgmini.eastday.com/mobile/20171013/20171013080330_3a5ee6c3be32f0b2eb8b5fe43e70aa31_2_mwpm_03200403.jpg","thumbnail_pic_s03":"http://08.imgmini.eastday.com/mobile/20171013/20171013080330_3a5ee6c3be32f0b2eb8b5fe43e70aa31_5_mwpm_03200403.jpg"},{"uniquekey":"461d00b37a60d65ead01e52bffe2fda5","title":"美神秘飞机接连曝光 专家：高超声速代表未来","date":"2017-10-13 08:03","category":"头条","author_name":"环球时报","url":"http://mini.eastday.com/mobile/171013080330633.html","thumbnail_pic_s":"http://02.imgmini.eastday.com/mobile/20171013/20171013080330_93e302d4b385fec293fe5b33b459ae5d_1_mwpm_03200403.jpg"},{"uniquekey":"1ba79b98564c07445b23f7b6a3af8cb7","title":"特朗普签署命令启动废除奥巴马医改计划","date":"2017-10-13 08:03","category":"头条","author_name":"环球网","url":"http://mini.eastday.com/mobile/171013080329878.html","thumbnail_pic_s":"http://01.imgmini.eastday.com/mobile/20171013/20171013080329_f12097060fa1d6407edf2d40ee21e572_1_mwpm_03200403.jpg"},{"uniquekey":"6a1ecd6acdead06e7fe29de39139dee4","title":"台风\u201c卡努\u201d向南海趋近 华北中南部黄淮西南部有雾","date":"2017-10-13 08:00","category":"头条","author_name":"人民网","url":"http://mini.eastday.com/mobile/171013080013647.html","thumbnail_pic_s":"http://07.imgmini.eastday.com/mobile/20171013/20171013080013_7dbec841a2c8a2c90ff2a5a2d866aade_2_mwpm_03200403.jpg","thumbnail_pic_s02":"http://07.imgmini.eastday.com/mobile/20171013/20171013080013_7dbec841a2c8a2c90ff2a5a2d866aade_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://07.imgmini.eastday.com/mobile/20171013/20171013080013_7dbec841a2c8a2c90ff2a5a2d866aade_5_mwpm_03200403.jpg"},{"uniquekey":"df25f331160bdc2d87a6ff759431fba7","title":"不化妆不出门的星座！","date":"2017-10-13 07:54","category":"头条","author_name":"星座大宝典","url":"http://mini.eastday.com/mobile/171013075401170.html","thumbnail_pic_s":"http://05.imgmini.eastday.com/mobile/20171013/20171013075401_ca7998b4ec1112bf7effae915070318f_3_mwpm_03200403.jpg","thumbnail_pic_s02":"http://05.imgmini.eastday.com/mobile/20171013/20171013075401_ca7998b4ec1112bf7effae915070318f_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://05.imgmini.eastday.com/mobile/20171013/20171013075401_ca7998b4ec1112bf7effae915070318f_2_mwpm_03200403.jpg"},{"uniquekey":"8fcd9382ef4b28a9eb73579814eb1f8d","title":"台风蓝色预警：\u201c卡努\u201d或15日傍晚在三亚到湛江沿海登陆","date":"2017-10-13 07:46","category":"头条","author_name":"人民网","url":"http://mini.eastday.com/mobile/171013074602414.html","thumbnail_pic_s":"http://03.imgmini.eastday.com/mobile/20171013/20171013074602_8778d950ff776a777453335bbf3074ee_2_mwpm_03200403.jpg","thumbnail_pic_s02":"http://03.imgmini.eastday.com/mobile/20171013/20171013074602_8778d950ff776a777453335bbf3074ee_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://03.imgmini.eastday.com/mobile/20171013/20171013074602_8778d950ff776a777453335bbf3074ee_3_mwpm_03200403.jpg"},{"uniquekey":"54fd87f62e28a16f5d6e455bf843f53e","title":"朴槿惠\u201c命运之日\u201d前夕 青瓦台曝出一重磅黑料","date":"2017-10-13 07:43","category":"头条","author_name":"海外网","url":"http://mini.eastday.com/mobile/171013074300809.html","thumbnail_pic_s":"http://09.imgmini.eastday.com/mobile/20171013/20171013074300_7fd4ac264196f1b2922da0b20e4f08ba_1_mwpm_03200403.jpg"},{"uniquekey":"27be27eb2523a05ea90f85d5d413683a","title":"朝鲜丰溪里附近发生2.9级地震 韩气象厅：自然地震","date":"2017-10-13 07:32","category":"头条","author_name":"环球网","url":"http://mini.eastday.com/mobile/171013073252140.html","thumbnail_pic_s":"http://02.imgmini.eastday.com/mobile/20171013/20171013073252_d2b25d3713d702baa1b1514384aac415_1_mwpm_03200403.jpg"},{"uniquekey":"a7553ca8072c31c8ff1937639459a7f7","title":"前三季度辽宁口岸进口水产品突破百万吨大关","date":"2017-10-13 07:23","category":"头条","author_name":"辽宁日报","url":"http://mini.eastday.com/mobile/171013072339939.html","thumbnail_pic_s":"http://07.imgmini.eastday.com/mobile/20171013/20171013072339_50b6a5b332a3f6463aeedab03d0c38d9_1_mwpm_03200403.jpg"},{"uniquekey":"41522f090ce5e0555db114d204723daa","title":"印度喷杀虫剂防登革热 民众烟雾中微笑","date":"2017-10-13 07:22","category":"头条","author_name":"视觉中国","url":"http://mini.eastday.com/mobile/171013072240884.html","thumbnail_pic_s":"http://03.imgmini.eastday.com/mobile/20171013/20171013072240_e5186a0ffb8b9a5367a21ad78e4a4c51_3_mwpm_03200403.jpg","thumbnail_pic_s02":"http://03.imgmini.eastday.com/mobile/20171013/20171013072240_e5186a0ffb8b9a5367a21ad78e4a4c51_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://03.imgmini.eastday.com/mobile/20171013/20171013072240_e5186a0ffb8b9a5367a21ad78e4a4c51_4_mwpm_03200403.jpg"},{"uniquekey":"9f5dc02bac404d89d8dc69789525ae69","title":"美加州大火增至29人遇难 消防队长：该结束它了","date":"2017-10-13 07:22","category":"头条","author_name":"海外网","url":"http://mini.eastday.com/mobile/171013072240332.html","thumbnail_pic_s":"http://05.imgmini.eastday.com/mobile/20171013/20171013072240_40176de0dd2778cd41df9634935a6461_3_mwpm_03200403.jpg","thumbnail_pic_s02":"http://05.imgmini.eastday.com/mobile/20171013/20171013072240_40176de0dd2778cd41df9634935a6461_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://05.imgmini.eastday.com/mobile/20171013/20171013072240_40176de0dd2778cd41df9634935a6461_2_mwpm_03200403.jpg"},{"uniquekey":"52e691bd57dfc9510326375bf3318155","title":"又摊上事了?这国把租用俄的潜艇用坏了,普京听到之后却笑了!","date":"2017-10-13 07:20","category":"头条","author_name":"军迷亮点","url":"http://mini.eastday.com/mobile/171013072009377.html","thumbnail_pic_s":"http://04.imgmini.eastday.com/mobile/20171013/20171013_23dcbe9d9b186633945e68123b2b4232_cover_mwpm_03200403.jpg","thumbnail_pic_s02":"http://04.imgmini.eastday.com/mobile/20171013/20171013_bf92a762cbffa21ec53c07908e547e80_cover_mwpm_03200403.jpg","thumbnail_pic_s03":"http://04.imgmini.eastday.com/mobile/20171013/20171013_1c1d279c58c8a82fcef9fecfef69749b_cover_mwpm_03200403.jpg"},{"uniquekey":"3f39d757439aefa2d6efdc3f7afc0022","title":"小池百合子，\u201c破局者\u201d还是\u201c一阵风\u201d？","date":"2017-10-13 07:12","category":"头条","author_name":"环球时报","url":"http://mini.eastday.com/mobile/171013071228915.html","thumbnail_pic_s":"http://00.imgmini.eastday.com/mobile/20171013/20171013071228_645967ab4fc0718f4f0eef5bc387d864_1_mwpm_03200403.jpg"},{"uniquekey":"5f98f6cf550620948c32d320058c69e4","title":"十九大时光｜青年创客老区创梦，大学生团队走进延安助力脱贫","date":"2017-10-13 07:05","category":"头条","author_name":"人民日报","url":"http://mini.eastday.com/mobile/171013070513891.html","thumbnail_pic_s":"http://01.imgmini.eastday.com/mobile/20171013/20171013070513_6f16679a02ece530f58170fba44ac470_1_mwpm_03200403.jpg"},{"uniquekey":"3bb114e82746d809e020aaf325867a1c","title":"朱茵白裙配红唇魅力十足 全程微笑女神范十足","date":"2017-10-13 07:02","category":"头条","author_name":"资料图","url":"http://mini.eastday.com/mobile/171013070216619.html","thumbnail_pic_s":"http://02.imgmini.eastday.com/mobile/20171013/20171013070216_e8914c9528d55006bfca4189c8678549_1_mwpm_03200403.jpg","thumbnail_pic_s02":"http://02.imgmini.eastday.com/mobile/20171013/20171013070216_e8914c9528d55006bfca4189c8678549_2_mwpm_03200403.jpg","thumbnail_pic_s03":"http://02.imgmini.eastday.com/mobile/20171013/20171013070216_e8914c9528d55006bfca4189c8678549_4_mwpm_03200403.jpg"},{"uniquekey":"bfa573bae18557423dff92ebb23f03f6","title":"两代\u201c谋女郎\u201dPK！倪妮周冬雨甜笑动作同步","date":"2017-10-13 07:02","category":"头条","author_name":"资料图","url":"http://mini.eastday.com/mobile/171013070216478.html","thumbnail_pic_s":"http://05.imgmini.eastday.com/mobile/20171013/20171013070216_9549fd929fa3f55d63d8432bc2fe1b5e_4_mwpm_03200403.jpg","thumbnail_pic_s02":"http://05.imgmini.eastday.com/mobile/20171013/20171013070216_9549fd929fa3f55d63d8432bc2fe1b5e_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://05.imgmini.eastday.com/mobile/20171013/20171013070216_9549fd929fa3f55d63d8432bc2fe1b5e_2_mwpm_03200403.jpg"},{"uniquekey":"23e65d408ab5d30843905991688a47ec","title":"男子逗猫时被抓伤皮肤未在意 数月后怕水怕风死亡","date":"2017-10-13 07:01","category":"头条","author_name":"成都商报","url":"http://mini.eastday.com/mobile/171013070150532.html","thumbnail_pic_s":"http://08.imgmini.eastday.com/mobile/20171013/20171013070150_da7b0188f91851492de8833fb119f99a_3_mwpm_03200403.jpg","thumbnail_pic_s02":"http://08.imgmini.eastday.com/mobile/20171013/20171013070150_da7b0188f91851492de8833fb119f99a_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://08.imgmini.eastday.com/mobile/20171013/20171013070150_da7b0188f91851492de8833fb119f99a_2_mwpm_03200403.jpg"},{"uniquekey":"599a5f6e268121d5fea7c882fde280e2","title":"\u201c美国知乎\u201d现在有一个奇葩问题中国有冰箱吗？","date":"2017-10-13 06:59","category":"头条","author_name":"zol中关村在线","url":"http://mini.eastday.com/mobile/171013065927128.html","thumbnail_pic_s":"http://09.imgmini.eastday.com/mobile/20171013/20171013065927_d41d8cd98f00b204e9800998ecf8427e_4_mwpm_03200403.jpg","thumbnail_pic_s02":"http://09.imgmini.eastday.com/mobile/20171013/20171013065927_d41d8cd98f00b204e9800998ecf8427e_3_mwpm_03200403.jpg","thumbnail_pic_s03":"http://09.imgmini.eastday.com/mobile/20171013/20171013065927_d41d8cd98f00b204e9800998ecf8427e_2_mwpm_03200403.jpg"},{"uniquekey":"a7d91c082d02e088036e9980bebc5d46","title":"最担心的事情终于发生了！韩国咎由自取已经急得像热锅上的蚂蚁了","date":"2017-10-13 06:56","category":"头条","author_name":"大国军情","url":"http://mini.eastday.com/mobile/171013065621159.html","thumbnail_pic_s":"http://02.imgmini.eastday.com/mobile/20171013/20171013_0451f084a8ac503f92159bcc5e1137da_cover_mwpm_03200403.jpg","thumbnail_pic_s02":"http://02.imgmini.eastday.com/mobile/20171013/20171013_d3a9b5397dbdba9ffe427a5ef25b319e_cover_mwpm_03200403.jpg","thumbnail_pic_s03":"http://02.imgmini.eastday.com/mobile/20171013/20171013_4d1531b55b53888580ccb3aa3f043bfd_cover_mwpm_03200403.jpg"},{"uniquekey":"5f3f20b80df04385b1d57a9b594d377e","title":"\u201c自行车王国\u201d重现 共享经济让国人变\u201c潮\u201d","date":"2017-10-13 06:55","category":"头条","author_name":"中国新闻网","url":"http://mini.eastday.com/mobile/171013065528515.html","thumbnail_pic_s":"http://03.imgmini.eastday.com/mobile/20171013/20171013065528_d4a321a549a762fbd368e5b61d43d744_8_mwpm_03200403.jpg","thumbnail_pic_s02":"http://03.imgmini.eastday.com/mobile/20171013/20171013065528_d4a321a549a762fbd368e5b61d43d744_7_mwpm_03200403.jpg","thumbnail_pic_s03":"http://03.imgmini.eastday.com/mobile/20171013/20171013065528_d4a321a549a762fbd368e5b61d43d744_1_mwpm_03200403.jpg"}]}
-     * error_code : 0
+     * showapi_res_code : 0
+     * showapi_res_error :
+     * showapi_res_body : {"ret_code":0,"pagebean":{"allPages":150,"contentlist":[{"date":"2017-10-25 12:48:01","ct":"2017-10-25 14:02:05.729","weixinNum":"zhxsbhw","url":"http://mp.weixin.qq.com/s?src=11&timestamp=1508911212&ver=473&signature=mP1D5OzTYJrrt*pn81-N0Wq8fIMvAsL3-gpa*cI92n-qQkMV18WMRBFX6dSWVwtvmZuCsVXUhF0ne5MpYlXx7kHRvtRH45RltlDJYPACKbt7moWlCBRtXyITFlMbdlS-&new=1","id":"57029655b9b5309bca5f2b8c022bdce5","typeName":"辣妈帮","title":"800万的房子算什么，你家熊孩子还不是照样没教养","contentImg":"http://mmbiz.qpic.cn/mmbiz_jpg/doe5wWMSjcarlctmgF3kxYfSeUrCkToPibebuFjsotlnAgwfvXYRkEic1BVtmV20IcNYzdYm9sJXyyab7f7NVEHw/0?wx_fmt=jpeg","_id":"59f028dd6e36a14449de11ee","userLogo":"http://mmbiz.qpic.cn/mmbiz/doe5wWMSjcbDCiaaH6aON4QH5ruTLFlamUpPVz1HDzaxxfGMIV9jzjTfryq0aqiaElK3tARD07GK3LchtqtD6XJg/0?wx_fmt=png","userName":"刑事法律圈","read_num":0,"like_num":0,"typeId":"11","userLogo_code":"http://open.weixin.qq.com/qr/code/?username=zhxsbhw"},{"date":"2017-10-25 06:59:26","ct":"2017-10-25 14:02:04.773","weixinNum":"Science_China","url":"http://mp.weixin.qq.com/s?src=11&timestamp=1508911207&ver=473&signature=WDOGeUlpl-XGmd9SHKO8NCQCSWjNombCb7UmgKRBd2kbkDQVA15MnSr5MMEyz2YcM1hdCOwUKEY2y-FWOAfqznalDmifFoMUp*rhUYhd30mjHaHwLARJjegVMF-IdSkQ&new=1","id":"05374745c3fee8e4b9650a4390ccc552","typeName":"爱生活","title":"早安！新闻来了丨2017年10月25日 星期三","contentImg":"http://mmbiz.qpic.cn/mmbiz_jpg/03UUuUr98GLmdrserzt625mLL1QmicDWUwzqYz3beia1dCeyYS39MUs5eqaHXu4IiawzXTt2icTiaoaGicSaEdKue38Q/0?wx_fmt=jpeg","_id":"59f028dc6e36a14449de11ed","userLogo":"http://mmbiz.qpic.cn/mmbiz/03UUuUr98GJicUZpZu49gtoM79CpK57jjqh64gyFcA90Ue89LbFOAqyuAaibQABibex2A5G7YnicS7o515U2NHT1vQ/0?wx_fmt=png","userName":"科普中国","read_num":0,"like_num":0,"typeId":"6","userLogo_code":"http://open.weixin.qq.com/qr/code/?username=Science_China"}],"currentPage":155,"allNum":3000,"maxResult":20}}
      */
 
-    private String reason;
-    private ResultBean result;
-    private int error_code;
+    private int showapi_res_code;
+    private String showapi_res_error;
+    private ShowapiResBodyBean showapi_res_body;
 
-    public String getReason() {
-        return reason;
+    public int getShowapi_res_code() {
+        return showapi_res_code;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setShowapi_res_code(int showapi_res_code) {
+        this.showapi_res_code = showapi_res_code;
     }
 
-    public ResultBean getResult() {
-        return result;
+    public String getShowapi_res_error() {
+        return showapi_res_error;
     }
 
-    public void setResult(ResultBean result) {
-        this.result = result;
+    public void setShowapi_res_error(String showapi_res_error) {
+        this.showapi_res_error = showapi_res_error;
     }
 
-    public int getError_code() {
-        return error_code;
+    public ShowapiResBodyBean getShowapi_res_body() {
+        return showapi_res_body;
     }
 
-    public void setError_code(int error_code) {
-        this.error_code = error_code;
+    public void setShowapi_res_body(ShowapiResBodyBean showapi_res_body) {
+        this.showapi_res_body = showapi_res_body;
     }
 
-    public static class ResultBean {
+    public static class ShowapiResBodyBean {
         /**
-         * stat : 1
-         * data : [{"uniquekey":"fe5f175d18d270e3709e16be1820f21c","title":"特朗普这回把全世界都得罪了，再次任性退出一国际组织！","date":"2017-10-13 09:18","category":"头条","author_name":"第一军情","url":"http://mini.eastday.com/mobile/171013091839383.html","thumbnail_pic_s":"http://09.imgmini.eastday.com/mobile/20171013/20171013_a74c903b43c5cca3bd26a5674623b5d5_cover_mwpm_03200403.jpg","thumbnail_pic_s02":"http://09.imgmini.eastday.com/mobile/20171013/20171013_e622f1d431640a796bc609bd52c0d37a_cover_mwpm_03200403.jpg","thumbnail_pic_s03":"http://09.imgmini.eastday.com/mobile/20171013/20171013_bac76f3ff6d2ca362fd5f27b8f29e01e_cover_mwpm_03200403.jpg"},{"uniquekey":"33ff9a50f8f20d4901c472c3d82e651c","title":"告别老房喜迁新居 济南城中村丁家庄大变样","date":"2017-10-13 09:06","category":"头条","author_name":"山东商报","url":"http://mini.eastday.com/mobile/171013090616370.html","thumbnail_pic_s":"http://06.imgmini.eastday.com/mobile/20171013/20171013090616_d41d8cd98f00b204e9800998ecf8427e_1_mwpm_03200403.jpg","thumbnail_pic_s02":"http://06.imgmini.eastday.com/mobile/20171013/20171013090616_d41d8cd98f00b204e9800998ecf8427e_2_mwpm_03200403.jpg","thumbnail_pic_s03":"http://06.imgmini.eastday.com/mobile/20171013/20171013090616_d41d8cd98f00b204e9800998ecf8427e_4_mwpm_03200403.jpg"},{"uniquekey":"f866b7cb832e9965bb89346ee250cf09","title":"广东省正厅级干部李进明涉嫌受贿罪被立案侦查","date":"2017-10-13 09:05","category":"头条","author_name":"人民网","url":"http://mini.eastday.com/mobile/171013090541583.html","thumbnail_pic_s":"http://04.imgmini.eastday.com/mobile/20171013/20171013090541_ba53aca791ce46231b79f31bad0c893c_1_mwpm_03200403.jpg"},{"uniquekey":"17679ee29b4f1e04a34e83c4918fc4c0","title":"章子怡出席活动精致夺目 造型贵气又俏皮","date":"2017-10-13 08:52","category":"头条","author_name":"新华网","url":"http://mini.eastday.com/mobile/171013085240489.html","thumbnail_pic_s":"http://09.imgmini.eastday.com/mobile/20171013/20171013085240_2930c8137e77025a747afdfede832f09_1_mwpm_03200403.jpg","thumbnail_pic_s02":"http://09.imgmini.eastday.com/mobile/20171013/20171013085240_ea3b0b00c49e33c677dd8ea870c53c11_2_mwpm_03200403.jpg","thumbnail_pic_s03":"http://09.imgmini.eastday.com/mobile/20171013/20171013085240_322a55e54533f3fc3e49169d8e9e9668_3_mwpm_03200403.jpg"},{"uniquekey":"3d80bc2491e556be2fa18af8dc0d2f79","title":"家中洗衣机有异动：藏了条52斤大蟒蛇","date":"2017-10-13 08:44","category":"头条","author_name":"重庆晨报","url":"http://mini.eastday.com/mobile/171013084447830.html","thumbnail_pic_s":"http://05.imgmini.eastday.com/mobile/20171013/20171013084447_2f991e234f8851cdd428b987a27ceee2_2_mwpm_03200403.jpg","thumbnail_pic_s02":"http://05.imgmini.eastday.com/mobile/20171013/20171013084447_2f991e234f8851cdd428b987a27ceee2_4_mwpm_03200403.jpg","thumbnail_pic_s03":"http://05.imgmini.eastday.com/mobile/20171013/20171013084447_2f991e234f8851cdd428b987a27ceee2_1_mwpm_03200403.jpg"},{"uniquekey":"7e3e4ced2d67c4acb527802be028564f","title":"伦敦大学专家帕尔多：对未来五年的中国充满期待","date":"2017-10-13 08:36","category":"头条","author_name":"人民网","url":"http://mini.eastday.com/mobile/171013083602763.html","thumbnail_pic_s":"http://03.imgmini.eastday.com/mobile/20171013/20171013083602_a4c6f0ba555ecf953c0cb23afe91666f_1_mwpm_03200403.jpg"},{"uniquekey":"e4488dc16dd7cd94d4ac27f745c2592e","title":"24小时内离开！ 杜特尔特不满外国批扫毒 对使节下逐客令","date":"2017-10-13 08:23","category":"头条","author_name":"环球网","url":"http://mini.eastday.com/mobile/171013082352981.html","thumbnail_pic_s":"http://01.imgmini.eastday.com/mobile/20171013/20171013082352_e3bfdda97132eb7328c066d189d73784_1_mwpm_03200403.jpg"},{"uniquekey":"a3d76bed1ff83d561532f094f015b8f9","title":"澳大利亚隐形战机等敏感数据失窃，政府回应称并无风险","date":"2017-10-13 08:23","category":"头条","author_name":"新华网","url":"http://mini.eastday.com/mobile/171013082343937.html","thumbnail_pic_s":"http://00.imgmini.eastday.com/mobile/20171013/20171013082343_4dc12baa6769a756e85bb45eca94c7c1_1_mwpm_03200403.jpg"},{"uniquekey":"37a21beeca08b913e8c220b1b5f83523","title":"女大学生获评国际手模大赛十佳手模 睡觉都不能脱手套","date":"2017-10-13 08:07","category":"头条","author_name":"楚天金报","url":"http://mini.eastday.com/mobile/171013080722557.html","thumbnail_pic_s":"http://04.imgmini.eastday.com/mobile/20171013/20171013080722_caa75ff8e27c150267ccc4fb5378ba4a_1_mwpm_03200403.jpg"},{"uniquekey":"5918d4bf6bf621752a4fb70bb234d3c2","title":"74名电信网络诈骗犯罪嫌疑人被押解回国","date":"2017-10-13 08:05","category":"头条","author_name":"新华网","url":"http://mini.eastday.com/mobile/171013080543802.html","thumbnail_pic_s":"http://07.imgmini.eastday.com/mobile/20171013/20171013080543_b404ce5d03fcbb1850d68222f2d7d31a_2_mwpm_03200403.jpg","thumbnail_pic_s02":"http://07.imgmini.eastday.com/mobile/20171013/20171013080543_3bb89b84ab193d8372c14bfa64d38a2f_4_mwpm_03200403.jpg","thumbnail_pic_s03":"http://07.imgmini.eastday.com/mobile/20171013/20171013080543_5d568501ad12c3aaff6a7ebdc6dcca1e_1_mwpm_03200403.jpg"},{"uniquekey":"86444e0d85c7d6422528003bb14c16f1","title":"斯里兰卡全国铁路大罢工 乘客\u201c挂火车\u201d人满为患","date":"2017-10-13 08:03","category":"头条","author_name":"环球网","url":"http://mini.eastday.com/mobile/171013080330846.html","thumbnail_pic_s":"http://08.imgmini.eastday.com/mobile/20171013/20171013080330_3a5ee6c3be32f0b2eb8b5fe43e70aa31_4_mwpm_03200403.jpg","thumbnail_pic_s02":"http://08.imgmini.eastday.com/mobile/20171013/20171013080330_3a5ee6c3be32f0b2eb8b5fe43e70aa31_2_mwpm_03200403.jpg","thumbnail_pic_s03":"http://08.imgmini.eastday.com/mobile/20171013/20171013080330_3a5ee6c3be32f0b2eb8b5fe43e70aa31_5_mwpm_03200403.jpg"},{"uniquekey":"461d00b37a60d65ead01e52bffe2fda5","title":"美神秘飞机接连曝光 专家：高超声速代表未来","date":"2017-10-13 08:03","category":"头条","author_name":"环球时报","url":"http://mini.eastday.com/mobile/171013080330633.html","thumbnail_pic_s":"http://02.imgmini.eastday.com/mobile/20171013/20171013080330_93e302d4b385fec293fe5b33b459ae5d_1_mwpm_03200403.jpg"},{"uniquekey":"1ba79b98564c07445b23f7b6a3af8cb7","title":"特朗普签署命令启动废除奥巴马医改计划","date":"2017-10-13 08:03","category":"头条","author_name":"环球网","url":"http://mini.eastday.com/mobile/171013080329878.html","thumbnail_pic_s":"http://01.imgmini.eastday.com/mobile/20171013/20171013080329_f12097060fa1d6407edf2d40ee21e572_1_mwpm_03200403.jpg"},{"uniquekey":"6a1ecd6acdead06e7fe29de39139dee4","title":"台风\u201c卡努\u201d向南海趋近 华北中南部黄淮西南部有雾","date":"2017-10-13 08:00","category":"头条","author_name":"人民网","url":"http://mini.eastday.com/mobile/171013080013647.html","thumbnail_pic_s":"http://07.imgmini.eastday.com/mobile/20171013/20171013080013_7dbec841a2c8a2c90ff2a5a2d866aade_2_mwpm_03200403.jpg","thumbnail_pic_s02":"http://07.imgmini.eastday.com/mobile/20171013/20171013080013_7dbec841a2c8a2c90ff2a5a2d866aade_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://07.imgmini.eastday.com/mobile/20171013/20171013080013_7dbec841a2c8a2c90ff2a5a2d866aade_5_mwpm_03200403.jpg"},{"uniquekey":"df25f331160bdc2d87a6ff759431fba7","title":"不化妆不出门的星座！","date":"2017-10-13 07:54","category":"头条","author_name":"星座大宝典","url":"http://mini.eastday.com/mobile/171013075401170.html","thumbnail_pic_s":"http://05.imgmini.eastday.com/mobile/20171013/20171013075401_ca7998b4ec1112bf7effae915070318f_3_mwpm_03200403.jpg","thumbnail_pic_s02":"http://05.imgmini.eastday.com/mobile/20171013/20171013075401_ca7998b4ec1112bf7effae915070318f_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://05.imgmini.eastday.com/mobile/20171013/20171013075401_ca7998b4ec1112bf7effae915070318f_2_mwpm_03200403.jpg"},{"uniquekey":"8fcd9382ef4b28a9eb73579814eb1f8d","title":"台风蓝色预警：\u201c卡努\u201d或15日傍晚在三亚到湛江沿海登陆","date":"2017-10-13 07:46","category":"头条","author_name":"人民网","url":"http://mini.eastday.com/mobile/171013074602414.html","thumbnail_pic_s":"http://03.imgmini.eastday.com/mobile/20171013/20171013074602_8778d950ff776a777453335bbf3074ee_2_mwpm_03200403.jpg","thumbnail_pic_s02":"http://03.imgmini.eastday.com/mobile/20171013/20171013074602_8778d950ff776a777453335bbf3074ee_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://03.imgmini.eastday.com/mobile/20171013/20171013074602_8778d950ff776a777453335bbf3074ee_3_mwpm_03200403.jpg"},{"uniquekey":"54fd87f62e28a16f5d6e455bf843f53e","title":"朴槿惠\u201c命运之日\u201d前夕 青瓦台曝出一重磅黑料","date":"2017-10-13 07:43","category":"头条","author_name":"海外网","url":"http://mini.eastday.com/mobile/171013074300809.html","thumbnail_pic_s":"http://09.imgmini.eastday.com/mobile/20171013/20171013074300_7fd4ac264196f1b2922da0b20e4f08ba_1_mwpm_03200403.jpg"},{"uniquekey":"27be27eb2523a05ea90f85d5d413683a","title":"朝鲜丰溪里附近发生2.9级地震 韩气象厅：自然地震","date":"2017-10-13 07:32","category":"头条","author_name":"环球网","url":"http://mini.eastday.com/mobile/171013073252140.html","thumbnail_pic_s":"http://02.imgmini.eastday.com/mobile/20171013/20171013073252_d2b25d3713d702baa1b1514384aac415_1_mwpm_03200403.jpg"},{"uniquekey":"a7553ca8072c31c8ff1937639459a7f7","title":"前三季度辽宁口岸进口水产品突破百万吨大关","date":"2017-10-13 07:23","category":"头条","author_name":"辽宁日报","url":"http://mini.eastday.com/mobile/171013072339939.html","thumbnail_pic_s":"http://07.imgmini.eastday.com/mobile/20171013/20171013072339_50b6a5b332a3f6463aeedab03d0c38d9_1_mwpm_03200403.jpg"},{"uniquekey":"41522f090ce5e0555db114d204723daa","title":"印度喷杀虫剂防登革热 民众烟雾中微笑","date":"2017-10-13 07:22","category":"头条","author_name":"视觉中国","url":"http://mini.eastday.com/mobile/171013072240884.html","thumbnail_pic_s":"http://03.imgmini.eastday.com/mobile/20171013/20171013072240_e5186a0ffb8b9a5367a21ad78e4a4c51_3_mwpm_03200403.jpg","thumbnail_pic_s02":"http://03.imgmini.eastday.com/mobile/20171013/20171013072240_e5186a0ffb8b9a5367a21ad78e4a4c51_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://03.imgmini.eastday.com/mobile/20171013/20171013072240_e5186a0ffb8b9a5367a21ad78e4a4c51_4_mwpm_03200403.jpg"},{"uniquekey":"9f5dc02bac404d89d8dc69789525ae69","title":"美加州大火增至29人遇难 消防队长：该结束它了","date":"2017-10-13 07:22","category":"头条","author_name":"海外网","url":"http://mini.eastday.com/mobile/171013072240332.html","thumbnail_pic_s":"http://05.imgmini.eastday.com/mobile/20171013/20171013072240_40176de0dd2778cd41df9634935a6461_3_mwpm_03200403.jpg","thumbnail_pic_s02":"http://05.imgmini.eastday.com/mobile/20171013/20171013072240_40176de0dd2778cd41df9634935a6461_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://05.imgmini.eastday.com/mobile/20171013/20171013072240_40176de0dd2778cd41df9634935a6461_2_mwpm_03200403.jpg"},{"uniquekey":"52e691bd57dfc9510326375bf3318155","title":"又摊上事了?这国把租用俄的潜艇用坏了,普京听到之后却笑了!","date":"2017-10-13 07:20","category":"头条","author_name":"军迷亮点","url":"http://mini.eastday.com/mobile/171013072009377.html","thumbnail_pic_s":"http://04.imgmini.eastday.com/mobile/20171013/20171013_23dcbe9d9b186633945e68123b2b4232_cover_mwpm_03200403.jpg","thumbnail_pic_s02":"http://04.imgmini.eastday.com/mobile/20171013/20171013_bf92a762cbffa21ec53c07908e547e80_cover_mwpm_03200403.jpg","thumbnail_pic_s03":"http://04.imgmini.eastday.com/mobile/20171013/20171013_1c1d279c58c8a82fcef9fecfef69749b_cover_mwpm_03200403.jpg"},{"uniquekey":"3f39d757439aefa2d6efdc3f7afc0022","title":"小池百合子，\u201c破局者\u201d还是\u201c一阵风\u201d？","date":"2017-10-13 07:12","category":"头条","author_name":"环球时报","url":"http://mini.eastday.com/mobile/171013071228915.html","thumbnail_pic_s":"http://00.imgmini.eastday.com/mobile/20171013/20171013071228_645967ab4fc0718f4f0eef5bc387d864_1_mwpm_03200403.jpg"},{"uniquekey":"5f98f6cf550620948c32d320058c69e4","title":"十九大时光｜青年创客老区创梦，大学生团队走进延安助力脱贫","date":"2017-10-13 07:05","category":"头条","author_name":"人民日报","url":"http://mini.eastday.com/mobile/171013070513891.html","thumbnail_pic_s":"http://01.imgmini.eastday.com/mobile/20171013/20171013070513_6f16679a02ece530f58170fba44ac470_1_mwpm_03200403.jpg"},{"uniquekey":"3bb114e82746d809e020aaf325867a1c","title":"朱茵白裙配红唇魅力十足 全程微笑女神范十足","date":"2017-10-13 07:02","category":"头条","author_name":"资料图","url":"http://mini.eastday.com/mobile/171013070216619.html","thumbnail_pic_s":"http://02.imgmini.eastday.com/mobile/20171013/20171013070216_e8914c9528d55006bfca4189c8678549_1_mwpm_03200403.jpg","thumbnail_pic_s02":"http://02.imgmini.eastday.com/mobile/20171013/20171013070216_e8914c9528d55006bfca4189c8678549_2_mwpm_03200403.jpg","thumbnail_pic_s03":"http://02.imgmini.eastday.com/mobile/20171013/20171013070216_e8914c9528d55006bfca4189c8678549_4_mwpm_03200403.jpg"},{"uniquekey":"bfa573bae18557423dff92ebb23f03f6","title":"两代\u201c谋女郎\u201dPK！倪妮周冬雨甜笑动作同步","date":"2017-10-13 07:02","category":"头条","author_name":"资料图","url":"http://mini.eastday.com/mobile/171013070216478.html","thumbnail_pic_s":"http://05.imgmini.eastday.com/mobile/20171013/20171013070216_9549fd929fa3f55d63d8432bc2fe1b5e_4_mwpm_03200403.jpg","thumbnail_pic_s02":"http://05.imgmini.eastday.com/mobile/20171013/20171013070216_9549fd929fa3f55d63d8432bc2fe1b5e_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://05.imgmini.eastday.com/mobile/20171013/20171013070216_9549fd929fa3f55d63d8432bc2fe1b5e_2_mwpm_03200403.jpg"},{"uniquekey":"23e65d408ab5d30843905991688a47ec","title":"男子逗猫时被抓伤皮肤未在意 数月后怕水怕风死亡","date":"2017-10-13 07:01","category":"头条","author_name":"成都商报","url":"http://mini.eastday.com/mobile/171013070150532.html","thumbnail_pic_s":"http://08.imgmini.eastday.com/mobile/20171013/20171013070150_da7b0188f91851492de8833fb119f99a_3_mwpm_03200403.jpg","thumbnail_pic_s02":"http://08.imgmini.eastday.com/mobile/20171013/20171013070150_da7b0188f91851492de8833fb119f99a_1_mwpm_03200403.jpg","thumbnail_pic_s03":"http://08.imgmini.eastday.com/mobile/20171013/20171013070150_da7b0188f91851492de8833fb119f99a_2_mwpm_03200403.jpg"},{"uniquekey":"599a5f6e268121d5fea7c882fde280e2","title":"\u201c美国知乎\u201d现在有一个奇葩问题中国有冰箱吗？","date":"2017-10-13 06:59","category":"头条","author_name":"zol中关村在线","url":"http://mini.eastday.com/mobile/171013065927128.html","thumbnail_pic_s":"http://09.imgmini.eastday.com/mobile/20171013/20171013065927_d41d8cd98f00b204e9800998ecf8427e_4_mwpm_03200403.jpg","thumbnail_pic_s02":"http://09.imgmini.eastday.com/mobile/20171013/20171013065927_d41d8cd98f00b204e9800998ecf8427e_3_mwpm_03200403.jpg","thumbnail_pic_s03":"http://09.imgmini.eastday.com/mobile/20171013/20171013065927_d41d8cd98f00b204e9800998ecf8427e_2_mwpm_03200403.jpg"},{"uniquekey":"a7d91c082d02e088036e9980bebc5d46","title":"最担心的事情终于发生了！韩国咎由自取已经急得像热锅上的蚂蚁了","date":"2017-10-13 06:56","category":"头条","author_name":"大国军情","url":"http://mini.eastday.com/mobile/171013065621159.html","thumbnail_pic_s":"http://02.imgmini.eastday.com/mobile/20171013/20171013_0451f084a8ac503f92159bcc5e1137da_cover_mwpm_03200403.jpg","thumbnail_pic_s02":"http://02.imgmini.eastday.com/mobile/20171013/20171013_d3a9b5397dbdba9ffe427a5ef25b319e_cover_mwpm_03200403.jpg","thumbnail_pic_s03":"http://02.imgmini.eastday.com/mobile/20171013/20171013_4d1531b55b53888580ccb3aa3f043bfd_cover_mwpm_03200403.jpg"},{"uniquekey":"5f3f20b80df04385b1d57a9b594d377e","title":"\u201c自行车王国\u201d重现 共享经济让国人变\u201c潮\u201d","date":"2017-10-13 06:55","category":"头条","author_name":"中国新闻网","url":"http://mini.eastday.com/mobile/171013065528515.html","thumbnail_pic_s":"http://03.imgmini.eastday.com/mobile/20171013/20171013065528_d4a321a549a762fbd368e5b61d43d744_8_mwpm_03200403.jpg","thumbnail_pic_s02":"http://03.imgmini.eastday.com/mobile/20171013/20171013065528_d4a321a549a762fbd368e5b61d43d744_7_mwpm_03200403.jpg","thumbnail_pic_s03":"http://03.imgmini.eastday.com/mobile/20171013/20171013065528_d4a321a549a762fbd368e5b61d43d744_1_mwpm_03200403.jpg"}]
+         * ret_code : 0
+         * pagebean : {"allPages":150,"contentlist":[{"date":"2017-10-25 12:48:01","ct":"2017-10-25 14:02:05.729","weixinNum":"zhxsbhw","url":"http://mp.weixin.qq.com/s?src=11&timestamp=1508911212&ver=473&signature=mP1D5OzTYJrrt*pn81-N0Wq8fIMvAsL3-gpa*cI92n-qQkMV18WMRBFX6dSWVwtvmZuCsVXUhF0ne5MpYlXx7kHRvtRH45RltlDJYPACKbt7moWlCBRtXyITFlMbdlS-&new=1","id":"57029655b9b5309bca5f2b8c022bdce5","typeName":"辣妈帮","title":"800万的房子算什么，你家熊孩子还不是照样没教养","contentImg":"http://mmbiz.qpic.cn/mmbiz_jpg/doe5wWMSjcarlctmgF3kxYfSeUrCkToPibebuFjsotlnAgwfvXYRkEic1BVtmV20IcNYzdYm9sJXyyab7f7NVEHw/0?wx_fmt=jpeg","_id":"59f028dd6e36a14449de11ee","userLogo":"http://mmbiz.qpic.cn/mmbiz/doe5wWMSjcbDCiaaH6aON4QH5ruTLFlamUpPVz1HDzaxxfGMIV9jzjTfryq0aqiaElK3tARD07GK3LchtqtD6XJg/0?wx_fmt=png","userName":"刑事法律圈","read_num":0,"like_num":0,"typeId":"11","userLogo_code":"http://open.weixin.qq.com/qr/code/?username=zhxsbhw"},{"date":"2017-10-25 06:59:26","ct":"2017-10-25 14:02:04.773","weixinNum":"Science_China","url":"http://mp.weixin.qq.com/s?src=11&timestamp=1508911207&ver=473&signature=WDOGeUlpl-XGmd9SHKO8NCQCSWjNombCb7UmgKRBd2kbkDQVA15MnSr5MMEyz2YcM1hdCOwUKEY2y-FWOAfqznalDmifFoMUp*rhUYhd30mjHaHwLARJjegVMF-IdSkQ&new=1","id":"05374745c3fee8e4b9650a4390ccc552","typeName":"爱生活","title":"早安！新闻来了丨2017年10月25日 星期三","contentImg":"http://mmbiz.qpic.cn/mmbiz_jpg/03UUuUr98GLmdrserzt625mLL1QmicDWUwzqYz3beia1dCeyYS39MUs5eqaHXu4IiawzXTt2icTiaoaGicSaEdKue38Q/0?wx_fmt=jpeg","_id":"59f028dc6e36a14449de11ed","userLogo":"http://mmbiz.qpic.cn/mmbiz/03UUuUr98GJicUZpZu49gtoM79CpK57jjqh64gyFcA90Ue89LbFOAqyuAaibQABibex2A5G7YnicS7o515U2NHT1vQ/0?wx_fmt=png","userName":"科普中国","read_num":0,"like_num":0,"typeId":"6","userLogo_code":"http://open.weixin.qq.com/qr/code/?username=Science_China"}],"currentPage":155,"allNum":3000,"maxResult":20}
          */
 
-        private String stat;
-        private List<DataBean> data;
+        private int ret_code;
+        private PagebeanBean pagebean;
 
-        public String getStat() {
-            return stat;
+        public int getRet_code() {
+            return ret_code;
         }
 
-        public void setStat(String stat) {
-            this.stat = stat;
+        public void setRet_code(int ret_code) {
+            this.ret_code = ret_code;
         }
 
-        public List<DataBean> getData() {
-            return data;
+        public PagebeanBean getPagebean() {
+            return pagebean;
         }
 
-        public void setData(List<DataBean> data) {
-            this.data = data;
+        public void setPagebean(PagebeanBean pagebean) {
+            this.pagebean = pagebean;
         }
 
-        public static class DataBean {
+        public static class PagebeanBean {
             /**
-             * uniquekey : fe5f175d18d270e3709e16be1820f21c
-             * title : 特朗普这回把全世界都得罪了，再次任性退出一国际组织！
-             * date : 2017-10-13 09:18
-             * category : 头条
-             * author_name : 第一军情
-             * url : http://mini.eastday.com/mobile/171013091839383.html
-             * thumbnail_pic_s : http://09.imgmini.eastday.com/mobile/20171013/20171013_a74c903b43c5cca3bd26a5674623b5d5_cover_mwpm_03200403.jpg
-             * thumbnail_pic_s02 : http://09.imgmini.eastday.com/mobile/20171013/20171013_e622f1d431640a796bc609bd52c0d37a_cover_mwpm_03200403.jpg
-             * thumbnail_pic_s03 : http://09.imgmini.eastday.com/mobile/20171013/20171013_bac76f3ff6d2ca362fd5f27b8f29e01e_cover_mwpm_03200403.jpg
+             * allPages : 150
+             * contentlist : [{"date":"2017-10-25 12:48:01","ct":"2017-10-25 14:02:05.729","weixinNum":"zhxsbhw","url":"http://mp.weixin.qq.com/s?src=11&timestamp=1508911212&ver=473&signature=mP1D5OzTYJrrt*pn81-N0Wq8fIMvAsL3-gpa*cI92n-qQkMV18WMRBFX6dSWVwtvmZuCsVXUhF0ne5MpYlXx7kHRvtRH45RltlDJYPACKbt7moWlCBRtXyITFlMbdlS-&new=1","id":"57029655b9b5309bca5f2b8c022bdce5","typeName":"辣妈帮","title":"800万的房子算什么，你家熊孩子还不是照样没教养","contentImg":"http://mmbiz.qpic.cn/mmbiz_jpg/doe5wWMSjcarlctmgF3kxYfSeUrCkToPibebuFjsotlnAgwfvXYRkEic1BVtmV20IcNYzdYm9sJXyyab7f7NVEHw/0?wx_fmt=jpeg","_id":"59f028dd6e36a14449de11ee","userLogo":"http://mmbiz.qpic.cn/mmbiz/doe5wWMSjcbDCiaaH6aON4QH5ruTLFlamUpPVz1HDzaxxfGMIV9jzjTfryq0aqiaElK3tARD07GK3LchtqtD6XJg/0?wx_fmt=png","userName":"刑事法律圈","read_num":0,"like_num":0,"typeId":"11","userLogo_code":"http://open.weixin.qq.com/qr/code/?username=zhxsbhw"},{"date":"2017-10-25 06:59:26","ct":"2017-10-25 14:02:04.773","weixinNum":"Science_China","url":"http://mp.weixin.qq.com/s?src=11&timestamp=1508911207&ver=473&signature=WDOGeUlpl-XGmd9SHKO8NCQCSWjNombCb7UmgKRBd2kbkDQVA15MnSr5MMEyz2YcM1hdCOwUKEY2y-FWOAfqznalDmifFoMUp*rhUYhd30mjHaHwLARJjegVMF-IdSkQ&new=1","id":"05374745c3fee8e4b9650a4390ccc552","typeName":"爱生活","title":"早安！新闻来了丨2017年10月25日 星期三","contentImg":"http://mmbiz.qpic.cn/mmbiz_jpg/03UUuUr98GLmdrserzt625mLL1QmicDWUwzqYz3beia1dCeyYS39MUs5eqaHXu4IiawzXTt2icTiaoaGicSaEdKue38Q/0?wx_fmt=jpeg","_id":"59f028dc6e36a14449de11ed","userLogo":"http://mmbiz.qpic.cn/mmbiz/03UUuUr98GJicUZpZu49gtoM79CpK57jjqh64gyFcA90Ue89LbFOAqyuAaibQABibex2A5G7YnicS7o515U2NHT1vQ/0?wx_fmt=png","userName":"科普中国","read_num":0,"like_num":0,"typeId":"6","userLogo_code":"http://open.weixin.qq.com/qr/code/?username=Science_China"}]
+             * currentPage : 155
+             * allNum : 3000
+             * maxResult : 20
              */
 
-            private String uniquekey;
-            private String title;
-            private String date;
-            private String category;
-            private String author_name;
-            private String url;
-            private String thumbnail_pic_s;
-            private String thumbnail_pic_s02;
-            private String thumbnail_pic_s03;
+            private int allPages;
+            private int currentPage;
+            private int allNum;
+            private int maxResult;
+            private List<ContentlistBean> contentlist;
 
-            public String getUniquekey() {
-                return uniquekey;
+            public int getAllPages() {
+                return allPages;
             }
 
-            public void setUniquekey(String uniquekey) {
-                this.uniquekey = uniquekey;
+            public void setAllPages(int allPages) {
+                this.allPages = allPages;
             }
 
-            public String getTitle() {
-                return title;
+            public int getCurrentPage() {
+                return currentPage;
             }
 
-            public void setTitle(String title) {
-                this.title = title;
+            public void setCurrentPage(int currentPage) {
+                this.currentPage = currentPage;
             }
 
-            public String getDate() {
-                return date;
+            public int getAllNum() {
+                return allNum;
             }
 
-            public void setDate(String date) {
-                this.date = date;
+            public void setAllNum(int allNum) {
+                this.allNum = allNum;
             }
 
-            public String getCategory() {
-                return category;
+            public int getMaxResult() {
+                return maxResult;
             }
 
-            public void setCategory(String category) {
-                this.category = category;
+            public void setMaxResult(int maxResult) {
+                this.maxResult = maxResult;
             }
 
-            public String getAuthor_name() {
-                return author_name;
+            public List<ContentlistBean> getContentlist() {
+                return contentlist;
             }
 
-            public void setAuthor_name(String author_name) {
-                this.author_name = author_name;
+            public void setContentlist(List<ContentlistBean> contentlist) {
+                this.contentlist = contentlist;
             }
 
-            public String getUrl() {
-                return url;
-            }
+            public static class ContentlistBean {
+                /**
+                 * date : 2017-10-25 12:48:01
+                 * ct : 2017-10-25 14:02:05.729
+                 * weixinNum : zhxsbhw
+                 * url : http://mp.weixin.qq.com/s?src=11&timestamp=1508911212&ver=473&signature=mP1D5OzTYJrrt*pn81-N0Wq8fIMvAsL3-gpa*cI92n-qQkMV18WMRBFX6dSWVwtvmZuCsVXUhF0ne5MpYlXx7kHRvtRH45RltlDJYPACKbt7moWlCBRtXyITFlMbdlS-&new=1
+                 * id : 57029655b9b5309bca5f2b8c022bdce5
+                 * typeName : 辣妈帮
+                 * title : 800万的房子算什么，你家熊孩子还不是照样没教养
+                 * contentImg : http://mmbiz.qpic.cn/mmbiz_jpg/doe5wWMSjcarlctmgF3kxYfSeUrCkToPibebuFjsotlnAgwfvXYRkEic1BVtmV20IcNYzdYm9sJXyyab7f7NVEHw/0?wx_fmt=jpeg
+                 * _id : 59f028dd6e36a14449de11ee
+                 * userLogo : http://mmbiz.qpic.cn/mmbiz/doe5wWMSjcbDCiaaH6aON4QH5ruTLFlamUpPVz1HDzaxxfGMIV9jzjTfryq0aqiaElK3tARD07GK3LchtqtD6XJg/0?wx_fmt=png
+                 * userName : 刑事法律圈
+                 * read_num : 0
+                 * like_num : 0
+                 * typeId : 11
+                 * userLogo_code : http://open.weixin.qq.com/qr/code/?username=zhxsbhw
+                 */
 
-            public void setUrl(String url) {
-                this.url = url;
-            }
+                private String date;
+                private String ct;
+                private String weixinNum;
+                private String url;
+                private String id;
+                private String typeName;
+                private String title;
+                private String contentImg;
+                private String _id;
+                private String userLogo;
+                private String userName;
+                private int read_num;
+                private int like_num;
+                private String typeId;
+                private String userLogo_code;
 
-            public String getThumbnail_pic_s() {
-                return thumbnail_pic_s;
-            }
+                public String getDate() {
+                    return date;
+                }
 
-            public void setThumbnail_pic_s(String thumbnail_pic_s) {
-                this.thumbnail_pic_s = thumbnail_pic_s;
-            }
+                public void setDate(String date) {
+                    this.date = date;
+                }
 
-            public String getThumbnail_pic_s02() {
-                return thumbnail_pic_s02;
-            }
+                public String getCt() {
+                    return ct;
+                }
 
-            public void setThumbnail_pic_s02(String thumbnail_pic_s02) {
-                this.thumbnail_pic_s02 = thumbnail_pic_s02;
-            }
+                public void setCt(String ct) {
+                    this.ct = ct;
+                }
 
-            public String getThumbnail_pic_s03() {
-                return thumbnail_pic_s03;
-            }
+                public String getWeixinNum() {
+                    return weixinNum;
+                }
 
-            public void setThumbnail_pic_s03(String thumbnail_pic_s03) {
-                this.thumbnail_pic_s03 = thumbnail_pic_s03;
+                public void setWeixinNum(String weixinNum) {
+                    this.weixinNum = weixinNum;
+                }
+
+                public String getUrl() {
+                    return url;
+                }
+
+                public void setUrl(String url) {
+                    this.url = url;
+                }
+
+                public String getId() {
+                    return id;
+                }
+
+                public void setId(String id) {
+                    this.id = id;
+                }
+
+                public String getTypeName() {
+                    return typeName;
+                }
+
+                public void setTypeName(String typeName) {
+                    this.typeName = typeName;
+                }
+
+                public String getTitle() {
+                    return title;
+                }
+
+                public void setTitle(String title) {
+                    this.title = title;
+                }
+
+                public String getContentImg() {
+                    return contentImg;
+                }
+
+                public void setContentImg(String contentImg) {
+                    this.contentImg = contentImg;
+                }
+
+                public String get_id() {
+                    return _id;
+                }
+
+                public void set_id(String _id) {
+                    this._id = _id;
+                }
+
+                public String getUserLogo() {
+                    return userLogo;
+                }
+
+                public void setUserLogo(String userLogo) {
+                    this.userLogo = userLogo;
+                }
+
+                public String getUserName() {
+                    return userName;
+                }
+
+                public void setUserName(String userName) {
+                    this.userName = userName;
+                }
+
+                public int getRead_num() {
+                    return read_num;
+                }
+
+                public void setRead_num(int read_num) {
+                    this.read_num = read_num;
+                }
+
+                public int getLike_num() {
+                    return like_num;
+                }
+
+                public void setLike_num(int like_num) {
+                    this.like_num = like_num;
+                }
+
+                public String getTypeId() {
+                    return typeId;
+                }
+
+                public void setTypeId(String typeId) {
+                    this.typeId = typeId;
+                }
+
+                public String getUserLogo_code() {
+                    return userLogo_code;
+                }
+
+                public void setUserLogo_code(String userLogo_code) {
+                    this.userLogo_code = userLogo_code;
+                }
             }
         }
     }

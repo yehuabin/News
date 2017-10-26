@@ -3,12 +3,12 @@ package com.yhb.news;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhb.news.adapter.IndexViewPagerAdpater;
+import com.yhb.news.views.NoScrollViewPager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +19,7 @@ public class MainActivity extends BaseActivity {
     TabLayout nav_tab;
 
     @BindView(R.id.index_viewpager)
-    ViewPager index_viewpager;
+    NoScrollViewPager index_viewpager;
 
 
     @Override
@@ -31,6 +31,8 @@ public class MainActivity extends BaseActivity {
 
         IndexViewPagerAdpater adpater=new IndexViewPagerAdpater(getSupportFragmentManager(),getBaseContext());
         index_viewpager.setAdapter(adpater);
+        index_viewpager.setOffscreenPageLimit(3);
+        index_viewpager.setNoScroll(true);
         nav_tab.setupWithViewPager(index_viewpager);
         for (int i=0;i<nav_tab.getTabCount();i++){
             TabLayout.Tab tab=nav_tab.getTabAt(i);
@@ -46,6 +48,8 @@ public class MainActivity extends BaseActivity {
                 textView.setTextColor(Color.parseColor("#d81e06"));
                 ImageView imageView= (ImageView) view.findViewById(R.id.index_image);
                 imageView.setImageResource((int)imageView.getTag(R.id.img_selected));
+
+                index_viewpager.setCurrentItem(tab.getPosition(), false);
             }
 
             @Override

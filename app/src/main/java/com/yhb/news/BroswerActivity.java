@@ -42,7 +42,7 @@ public class BroswerActivity extends BaseActivity implements View.OnTouchListene
         Bundle bundle = getIntent().getExtras();
         webView.loadUrl(bundle.getString("url"));
         WebSettings webSettings=webView.getSettings();
-        webSettings.setJavaScriptEnabled(false);
+        webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
             //覆盖shouldOverrideUrlLoading 方法
             @Override
