@@ -32,20 +32,15 @@ public class TouTiaoViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return TouTiaoType.GetVal( data.get(position));
+        return TouTiaoType.getVal(String.valueOf(position));
     }
 
     @Override
     public Fragment getItem(int position) {
         Fragment fragment=new TouTiaoFragment();
         Bundle bundle=new Bundle();
-        if (position==0){
-            position=-1;
-        }
-        else {
-            position--;
-        }
-        bundle.putString("type",String.valueOf(position));
+
+        bundle.putString("type",TouTiaoType.getVal(String.valueOf(position)));
         fragment.setArguments(bundle);
         return fragment;
     }

@@ -17,10 +17,9 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.yhb.news.R;
 import com.yhb.news.model.MeiNvModel;
+import com.yhb.news.utils.TouTiaoType;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,12 +64,8 @@ public class IndexFragment extends Fragment {
         if (position==0){
             view=inflater.inflate(R.layout.index_1,null);
             unbinder= ButterKnife.bind(this,view);
-            List<String> data = new ArrayList<String>();
-            Integer i=-1;
-            while (i<19){
-                data.add(i.toString());
-                i++;
-            }
+
+
             toutiao_tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
@@ -88,7 +83,7 @@ public class IndexFragment extends Fragment {
                 }
             });
             toutiao_tab.setTabMode(MODE_SCROLLABLE);
-            TouTiaoViewPagerAdapter adapter = new TouTiaoViewPagerAdapter(getFragmentManager(), view.getContext(), data);
+            TouTiaoViewPagerAdapter adapter = new TouTiaoViewPagerAdapter(getFragmentManager(), view.getContext(), TouTiaoType.getData());
             toutiao_viewpager.setAdapter(adapter);
             toutiao_tab.setupWithViewPager(toutiao_viewpager);
         }

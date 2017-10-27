@@ -19,6 +19,7 @@ import com.yhb.news.model.TouTiao;
 import com.yhb.news.utils.LineDecoration;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,11 +56,9 @@ public class TouTiaoFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         String type = bundle.getString("type");
-        if (type == "-1") {
-            type = "";
-        }
+
         final View view = inflater.inflate(R.layout.toutiao_fragment, null);
-        String url = "http://route.showapi.com/582-2?showapi_appid=48278&showapi_sign=8e890585f9634beda7ac94a10a2c0142&typeId=" + type + "&rows=50&page=1";
+        String url = "http://pc.recommend.kandian.360.cn/youlike?u=50067044.3549630852473969700.1509085179855.3418&n=20&f=json&o=rand&fr=home&option=history";
         final Request request = new Request.Builder().url(url).build();
 
         unbinder = ButterKnife.bind(this, view);
@@ -94,11 +93,11 @@ public class TouTiaoFragment extends Fragment {
             public void onResponse(Call call, Response response) throws IOException {
                 String json = response.body().string();
                 Gson gson = new Gson();
-                final TouTiao touTiao = gson.fromJson(json, TouTiao.class);
+                final TouTiao[] touTiao = gson.fromJson(json, TouTiao[].class);
 
                 final Runnable mRunnable = new Runnable() {
                     public void run() {
-                        TouTiaoAdapter adapter = new TouTiaoAdapter(view.getContext(), touTiao.getShowapi_res_body().getPagebean().getContentlist());
+                        TouTiaoAdapter adapter = new TouTiaoAdapter(view.getContext(), Arrays.asList(touTiao));
                         toutiao_list.setAdapter(adapter);
                         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.line_progress);
                         linearLayout.setVisibility(View.GONE);

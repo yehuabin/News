@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.yhb.news.BroswerActivity;
 import com.yhb.news.R;
 import com.yhb.news.model.TouTiao;
@@ -24,9 +25,9 @@ import java.util.List;
 public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHolder> {
 
     LayoutInflater inflater;
-    List<TouTiao.ShowapiResBodyBean.PagebeanBean.ContentlistBean> data;
+    List<TouTiao> data;
 
-    public TouTiaoAdapter(Context context, List<TouTiao.ShowapiResBodyBean.PagebeanBean.ContentlistBean> data) {
+    public TouTiaoAdapter(Context context,   List<TouTiao> data) {
 
        this.data=data;
         this.inflater = LayoutInflater.from(context);
@@ -54,15 +55,15 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        final TouTiao.ShowapiResBodyBean.PagebeanBean.ContentlistBean item = data.get(position);
-        holder.title.setText(item.getTitle());
-        holder.author.setText(item.getTypeName()+item.getDate());
-        holder.date.setText(item.getDate());
+        final   TouTiao item = data.get(position);
+        holder.title.setText(item.getT());
+        holder.author.setText(item.getF());
+       // holder.date.setText(item.getP());
        // new ImageService(holder.thumb).execute(item.getThumbnail_pic_s());
-        holder.itemView.setTag(item.getUrl());
+        holder.itemView.setTag(item.getU());
 
-        Glide.with(holder.itemView.getContext()).load(item.getUserLogo_code())
-
+        Glide.with(holder.itemView.getContext()).asBitmap().load(item.getI())
+                .transition(BitmapTransitionOptions.withCrossFade(500))
                .into(holder.thumb);
 
     }

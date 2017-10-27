@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="2017-10-13 10:28"
                 android:textColor="@android:color/darker_gray"
-                android:visibility="gone"/>
+                />
 
             <TextView
                 android:id="@+id/tv_author"

@@ -1,6 +1,8 @@
 package com.yhb.news.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,29 +13,23 @@ public class TouTiaoType {
     private static Map<String, String> maps = new HashMap<>();
 
     static {
-        maps.put("-1", "首页");
-        maps.put("0", "热点");
-        maps.put("1", "推荐");
-        maps.put("2", "段子手");
-        maps.put("3", "养生堂");
-        maps.put("4", "私房话");
-        maps.put("5", "八卦精");
-        maps.put("6", "爱生活");
-        maps.put("7", "财经迷");
-        maps.put("8", "汽车迷");
-        maps.put("9", "科技咖");
-        maps.put("10", "潮人帮");
-        maps.put("11", "辣妈帮");
-        maps.put("12", "点赞党");
-        maps.put("13", "旅行家");
-        maps.put("14", "职场人");
-        maps.put("15", "美食家");
-        maps.put("16", "古今通");
-        maps.put("17", "学霸族");
-        maps.put("18", "星座控");
+        maps.put("0", "头条");
+        maps.put("1", "新闻");
+        maps.put("2", "财经");
+        maps.put("3", "体育");
+        maps.put("4", "娱乐");
+        maps.put("5", "军事");
+        maps.put("6", "教育");
+        maps.put("7", "科技");
+        maps.put("8", "NBA");
+        maps.put("9", "股票");
+        maps.put("10", "星座");
+        maps.put("11", "女性");
+        maps.put("12", "健康");
+        maps.put("13", "育儿");
     }
 
-    public static String GetVal(String key) {
+    public static String getVal(String key) {
         String val = "";
         for (Map.Entry<String, String> m : maps.entrySet()) {
             if (m.getKey().equals( key)) {
@@ -42,5 +38,13 @@ public class TouTiaoType {
             }
         }
         return val;
+    }
+
+    public static List<String> getData(){
+        List<String> data=new ArrayList<>();
+        for (Map.Entry<String, String> m : maps.entrySet()) {
+           data.add(m.getValue());
+        }
+        return data;
     }
 }
