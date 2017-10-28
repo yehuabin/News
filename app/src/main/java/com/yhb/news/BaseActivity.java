@@ -5,8 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import cn.bmob.v3.Bmob;
-
 /**
  * Created by smk on 2017/10/23.
  */
@@ -17,7 +15,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, getClass().getSimpleName());
-        Bmob.initialize(this, "dea7ae809d44271f6aa82501c9e0a4fc");
+        //Bmob.initialize(this, "dea7ae809d44271f6aa82501c9e0a4fc");
     }
 
 }

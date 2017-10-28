@@ -14,11 +14,11 @@ import java.util.List;
  * Created by smk on 2017/10/16.
  */
 
-public class TouTiaoViewPagerAdapter extends FragmentPagerAdapter {
+public class NewsPagerAdapter extends FragmentPagerAdapter {
     private Context context;
     private List<String> data;
 
-    public TouTiaoViewPagerAdapter(FragmentManager fm, Context context,List<String> data) {
+    public NewsPagerAdapter(FragmentManager fm, Context context, List<String> data) {
         super(fm);
         this.context = context;
         this.data=data;
@@ -37,10 +37,10 @@ public class TouTiaoViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment=new TouTiaoFragment();
+        Fragment fragment=new NewsFragment();
         Bundle bundle=new Bundle();
 
-        bundle.putString("type",TouTiaoType.getVal(String.valueOf(position)));
+        bundle.putInt("position",position);
         fragment.setArguments(bundle);
         return fragment;
     }

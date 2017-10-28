@@ -1,6 +1,5 @@
 package com.yhb.news.adapter;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -83,7 +82,7 @@ public class IndexFragment extends Fragment {
                 }
             });
             toutiao_tab.setTabMode(MODE_SCROLLABLE);
-            TouTiaoViewPagerAdapter adapter = new TouTiaoViewPagerAdapter(getFragmentManager(), view.getContext(), TouTiaoType.getData());
+            NewsPagerAdapter adapter = new NewsPagerAdapter(getFragmentManager(), view.getContext(), TouTiaoType.getData());
             toutiao_viewpager.setAdapter(adapter);
             toutiao_tab.setupWithViewPager(toutiao_viewpager);
         }
@@ -108,7 +107,7 @@ public class IndexFragment extends Fragment {
                     staggeredGridLayoutManager.invalidateSpanAssignments();
                 }
             });
-            String url="http://route.showapi.com/1208-2?showapi_appid=48278&showapi_sign=8e890585f9634beda7ac94a10a2c0142&type=1&rows=50&page=1";
+            String url="https://pixabay.com/api/?key=6846383-1d7046f0aa07d2bdfe38f945f&per_page=50&image_type=photo&catetory=fashion&editors_choice=true";
             Request request=new Request.Builder().url(url).build();
             OkHttpClient okHttpClient=new OkHttpClient();
             okHttpClient.newCall(request).enqueue(new Callback() {
@@ -126,7 +125,7 @@ public class IndexFragment extends Fragment {
 
                     final Runnable mRunnable = new Runnable() {
                         public void run() {
-                            MeiNvAdapter adapter = new MeiNvAdapter(inflater, meiNvModel.getShowapi_res_body().getData());
+                            MeiNvAdapter adapter = new MeiNvAdapter(inflater, meiNvModel.getHits());
                             rv_meinv.setAdapter(adapter);
 
                         }
@@ -145,43 +144,4 @@ public class IndexFragment extends Fragment {
 
         return view;
     }
-}
- class SpaceItemDecoration extends RecyclerView.ItemDecoration{
-     int mSpace;
-
-     /**
-      * Retrieve any offsets for the given item. Each field of <code>outRect</code> specifies
-      * the number of pixels that the item view should be inset by, similar to padding or margin.
-      * The default implementation sets the bounds of outRect to 0 and returns.
-      * <p>
-      * <p>
-      * If this ItemDecoration does not affect the positioning of item views, it should set
-      * all four fields of <code>outRect</code> (left, top, right, bottom) to zero
-      * before returning.
-      * <p>
-      * <p>
-      * If you need to access Adapter for additional data, you can call
-      * {@link RecyclerView#getChildAdapterPosition(View)} to get the adapter position of the
-      * View.
-      *
-      * @param outRect Rect to receive the output.
-      * @param view    The child view to decorate
-      * @param parent  RecyclerView this ItemDecoration is decorating
-      * @param state   The current state of RecyclerView.
-      */
-     @Override
-     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-         super.getItemOffsets(outRect, view, parent, state);
-         outRect.left = mSpace;
-         outRect.right = mSpace;
-         outRect.bottom = mSpace;
-         if (parent.getChildAdapterPosition(view) == 0) {
-             outRect.top = mSpace;
-         }
-
-     }
-
-     public SpaceItemDecoration(int space) {
-         this.mSpace = space;
-     }
 }

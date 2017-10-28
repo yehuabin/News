@@ -15,18 +15,10 @@ public class TouTiaoType {
     static {
         maps.put("0", "头条");
         maps.put("1", "新闻");
-        maps.put("2", "财经");
-        maps.put("3", "体育");
-        maps.put("4", "娱乐");
-        maps.put("5", "军事");
-        maps.put("6", "教育");
-        maps.put("7", "科技");
-        maps.put("8", "NBA");
-        maps.put("9", "股票");
-        maps.put("10", "星座");
-        maps.put("11", "女性");
-        maps.put("12", "健康");
-        maps.put("13", "育儿");
+        maps.put("2", "娱乐");
+        maps.put("3", "NBA");
+        maps.put("4", "体育");
+
     }
 
     public static String getVal(String key) {

@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.yhb.news.BroswerActivity;
 import com.yhb.news.R;
-import com.yhb.news.model.TouTiao;
+import com.yhb.news.model.NewsCommonModel;
 
 import java.util.List;
 
@@ -22,12 +22,12 @@ import java.util.List;
  * Created by smk on 2017/10/13.
  */
 
-public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     LayoutInflater inflater;
-    List<TouTiao> data;
+    List<NewsCommonModel> data;
 
-    public TouTiaoAdapter(Context context,   List<TouTiao> data) {
+    public NewsAdapter(Context context, List<NewsCommonModel> data) {
 
        this.data=data;
         this.inflater = LayoutInflater.from(context);
@@ -35,7 +35,7 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.toutiao_item, parent, false);
+        View view = inflater.inflate(R.layout.news_item, parent, false);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,23 +49,44 @@ public class TouTiaoAdapter extends RecyclerView.Adapter<TouTiaoAdapter.ViewHold
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
+    //添加数据
+    public void addItem(List<NewsCommonModel> newDatas) {
 
+//        newDatas.addAll(mTitles);
+//        mTitles.removeAll(mTitles);
+//        mTitles.addAll(newDatas);
+        boolean hasNew=false;
+        for (int i=newDatas.size()-1;i>=0;i--){
+            if(!data.contains(newDatas.get(i))){
+                data.add(0,newDatas.get(i));
+                hasNew=true;
+            }
+        }
+        if (hasNew){
+            notifyDataSetChanged();
+        }
+    }
+
+    public void addMoreItem(List<String> newDatas) {
+       // mTitles.addAll(newDatas);
+        notifyDataSetChanged();
+    }
 
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        final   TouTiao item = data.get(position);
-        holder.title.setText(item.getT());
-        holder.author.setText(item.getF());
-       // holder.date.setText(item.getP());
-       // new ImageService(holder.thumb).execute(item.getThumbnail_pic_s());
-        holder.itemView.setTag(item.getU());
+        final   NewsCommonModel item = data.get(position);
+        holder.title.setText(item.getTitle());
+        holder.author.setText(item.getAuthor());
+        holder.date.setText(item.getDate());
+        holder.itemView.setTag(item.getUrl());
 
-        Glide.with(holder.itemView.getContext()).asBitmap().load(item.getI())
-                .transition(BitmapTransitionOptions.withCrossFade(500))
-               .into(holder.thumb);
-
+        if (item.getImage()!=null) {
+            Glide.with(holder.itemView.getContext()).asBitmap().load(item.getImage())
+                    .transition(BitmapTransitionOptions.withCrossFade(500))
+                    .into(holder.thumb);
+        }
     }
 
     @Override

@@ -6,7 +6,6 @@ import android.graphics.Matrix;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +32,10 @@ import java.util.Map;
 
 public class MeiNvAdapter extends RecyclerView.Adapter<MeiNvAdapter.ViewHolder> {
     private static final String TAG = "MeiNvAdapter";
-    private List<MeiNvModel.ShowapiResBodyBean.DataBean> data;
+    private List<MeiNvModel.HitsBean> data;
     private LayoutInflater inflater;
 
-    public MeiNvAdapter(LayoutInflater inflater, List<MeiNvModel.ShowapiResBodyBean.DataBean> data) {
+    public MeiNvAdapter(LayoutInflater inflater, List<MeiNvModel.HitsBean> data) {
         this.data = data;
         this.inflater = inflater;
     }
@@ -59,12 +58,11 @@ public class MeiNvAdapter extends RecyclerView.Adapter<MeiNvAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        Log.d(TAG, "onBindViewHolder: "+position);
         if (mHeights.containsKey(position)) {
             ViewGroup.LayoutParams layoutParams = holder.thumb.getLayoutParams();
             layoutParams.height = mHeights.get(position);
         }
-        Glide.with(holder.itemView.getContext()).asBitmap().load(data.get(position).getImgurl())
+        Glide.with(holder.itemView.getContext()).asBitmap().load(data.get(position).getPreviewURL())
                 .transition(BitmapTransitionOptions.withCrossFade(500))
                 .listener(new RequestListener<Bitmap>() {
                     @Override
