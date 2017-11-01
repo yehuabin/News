@@ -54,13 +54,14 @@ public class NewsCommonModel {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof NewsCommonModel)) {
+        if (obj==null||!(obj instanceof NewsCommonModel)) {
             return false;
         }
         NewsCommonModel other = (NewsCommonModel) obj;
-        if (other.getUrl().equals(this.getUrl())) {
+        if (other.getUrl()!=null&&other.getUrl().equals(this.getUrl())) {
             return true;
         }
+
         return false;
     }
 

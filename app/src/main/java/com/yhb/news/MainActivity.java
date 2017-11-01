@@ -8,13 +8,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhb.news.adapter.IndexViewPagerAdpater;
+import com.yhb.news.utils.RefreshEvent;
 import com.yhb.news.views.NoScrollViewPager;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
-
+    private static final String TAG = "MainActivity";
     @BindView(R.id.nav_tab)
     TabLayout nav_tab;
 
@@ -64,7 +67,11 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                if (tab.getPosition()==0) {
+                    TabLayout tabLayout = (TabLayout) index_viewpager.findViewById(R.id.toutiao_tab);
 
+                    EventBus.getDefault().post(new RefreshEvent(tabLayout.getSelectedTabPosition()));
+                }
             }
         });
 

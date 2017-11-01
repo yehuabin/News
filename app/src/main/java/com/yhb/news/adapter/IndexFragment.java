@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.yhb.news.R;
 import com.yhb.news.model.MeiNvModel;
-import com.yhb.news.utils.TouTiaoType;
+import com.yhb.news.utils.NewsUtil;
 
 import java.io.IOException;
 
@@ -65,24 +65,24 @@ public class IndexFragment extends Fragment {
             unbinder= ButterKnife.bind(this,view);
 
 
-            toutiao_tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                @Override
-                public void onTabSelected(TabLayout.Tab tab) {
-                    tab.getText();
-                }
-
-                @Override
-                public void onTabUnselected(TabLayout.Tab tab) {
-
-                }
-
-                @Override
-                public void onTabReselected(TabLayout.Tab tab) {
-
-                }
-            });
+//            toutiao_tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//                @Override
+//                public void onTabSelected(TabLayout.Tab tab) {
+//                    tab.getText();
+//                }
+//
+//                @Override
+//                public void onTabUnselected(TabLayout.Tab tab) {
+//
+//                }
+//
+//                @Override
+//                public void onTabReselected(TabLayout.Tab tab) {
+//
+//                }
+//            });
             toutiao_tab.setTabMode(MODE_SCROLLABLE);
-            NewsPagerAdapter adapter = new NewsPagerAdapter(getFragmentManager(), view.getContext(), TouTiaoType.getData());
+            NewsPagerAdapter adapter = new NewsPagerAdapter(getFragmentManager(), view.getContext(), NewsUtil.getData());
             toutiao_viewpager.setAdapter(adapter);
             toutiao_tab.setupWithViewPager(toutiao_viewpager);
         }
@@ -127,17 +127,14 @@ public class IndexFragment extends Fragment {
                         public void run() {
                             MeiNvAdapter adapter = new MeiNvAdapter(inflater, meiNvModel.getHits());
                             rv_meinv.setAdapter(adapter);
-
                         }
                     };
                     new Thread() {
                         @Override
                         public void run() {
-
                             handler.post(mRunnable);
                         }
                     }.start();
-
                 }
             });
         }

@@ -28,7 +28,7 @@ public class IndexViewPagerAdpater extends FragmentPagerAdapter {
         data=new ArrayList<>();
         data.add("资讯");
         data.add("笑话");
-        data.add("美女");
+        data.add("美图");
     }
 
     @Override

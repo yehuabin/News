@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
-import com.yhb.news.utils.TouTiaoType;
+import com.yhb.news.utils.NewsUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,12 +19,18 @@ import java.util.List;
 public class NewsPagerAdapter extends FragmentPagerAdapter {
     private Context context;
     private List<String> data;
+    private List<Fragment> fragmentList;
+    FragmentManager fm;
 
     public NewsPagerAdapter(FragmentManager fm, Context context, List<String> data) {
         super(fm);
         this.context = context;
-        this.data=data;
-
+        this.data = data;
+        this.fm = fm;
+        fragmentList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            fragmentList.add(new NewsFragment());
+        }
     }
 
     @Override
@@ -32,17 +40,34 @@ public class NewsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return TouTiaoType.getVal(String.valueOf(position));
+        return NewsUtil.getVal(String.valueOf(position));
     }
 
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment=new NewsFragment();
-        Bundle bundle=new Bundle();
+        Fragment fragment = fragmentList.get(position);
+        Bundle bundle = new Bundle();
 
-        bundle.putInt("position",position);
+        bundle.putInt("position", position);
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public Fragment instantiateItem(ViewGroup container, int position) {
+        Fragment fragment = (Fragment) super.instantiateItem(container,
+                position);
+        fm.beginTransaction().show(fragment).commit();
+
+        return fragment;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        // super.destroyItem(container, position, object);
+        Fragment fragment = fragmentList.get(position);
+        fm.beginTransaction().hide(fragment).commit();
+
     }
 }
 
