@@ -19,10 +19,10 @@ import java.util.List;
  * Created by smk on 2017/10/20.
  */
 
-public class IndexViewPagerAdpater extends FragmentPagerAdapter {
+public class AppPagerAdapter extends FragmentPagerAdapter {
     List<String> data;
     private Context context;
-    public IndexViewPagerAdpater(FragmentManager fm,Context context) {
+    public AppPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context=context;
         data=new ArrayList<>();
@@ -40,7 +40,7 @@ public class IndexViewPagerAdpater extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Bundle bundle=new Bundle();
         bundle.putInt("position",position);
-        Fragment fragment=new IndexFragment();
+        Fragment fragment=new AppFragment();
 
         fragment.setArguments(bundle);
         return fragment;
@@ -52,7 +52,7 @@ public class IndexViewPagerAdpater extends FragmentPagerAdapter {
     }
 
     public View getTabView(int position){
-        View view= LayoutInflater.from(context).inflate(R.layout.index_tab,null);
+        View view= LayoutInflater.from(context).inflate(R.layout.app_tab_item,null);
         TextView textView= (TextView) view.findViewById(R.id.index_title);
         ImageView imageView= (ImageView) view.findViewById(R.id.index_image);
         switch (position){

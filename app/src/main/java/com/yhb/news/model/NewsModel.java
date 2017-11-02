@@ -11,7 +11,8 @@ import java.util.List;
 
 public class NewsModel {
 
-   @SerializedName(value = "BD2AQH4Qwangning",alternate = {"BBM54PGAwangning","BA10TA81wangning","list","BA8E6OEOwangning"})
+   @SerializedName(value = "BD2AQH4Qwangning",alternate = {"BBM54PGAwangning",
+           "BA10TA81wangning","list","BA8E6OEOwangning","BD21K0DLwangning"})
     private List<News> newsList;
 
     public List<News> getNewsList() {

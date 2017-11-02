@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -30,18 +32,7 @@ public class BroswerActivity extends BaseActivity {
         webView.loadUrl(newsUrl);
         //webView.loadUrl("http://ceshi.sxjz.gov.cn/bmtzgg/content_196215");
 
-        webView.setWebViewClient(new WebViewClient() {
-            //覆盖shouldOverrideUrlLoading 方法
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (!newsUrl.equals(url)) {
-                    return false;
-                }
-                Log.d(TAG, "shouldOverrideUrlLoading: " + url);
-                view.loadUrl(url);
-                return true;
-            }
-        });
+
         webView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -59,7 +50,24 @@ public class BroswerActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                webView.loadUrl("javascript:$(\".doc-footer-wrapper,header,.js-topad,.js-altop,.footer,.icon_index\").remove()");
+                webView.loadUrl("javascript:$(\".doc-footer-wrapper,header,.js-topad,.js-altop,.js-columsADBlowContent,.icon_index\").remove()");
+            }
+
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+                return super.shouldInterceptRequest(view,request);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+               return true;
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                Log.d(TAG, "shouldOverrideUrlLoading2: "+request.getUrl());
+                return true;
             }
         });
         WebSettings webSettings = webView.getSettings();

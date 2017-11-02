@@ -11,6 +11,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.gson.Gson;
 import com.yhb.news.R;
 import com.yhb.news.model.NewsCommonModel;
 import com.yhb.news.model.NewsModel;
+import com.yhb.news.utils.HttpUtil;
 import com.yhb.news.utils.LineDecoration;
 import com.yhb.news.utils.NewsUtil;
 import com.yhb.news.utils.RefreshEvent;
@@ -39,8 +41,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 
 public class NewsFragment extends Fragment {
@@ -57,7 +57,7 @@ public class NewsFragment extends Fragment {
     Handler handler = new Handler();
     LayoutInflater inflater;
 
-    OkHttpClient okHttpClient = new OkHttpClient();
+
     private Unbinder unbinder;
 
     @Override
@@ -74,31 +74,33 @@ public class NewsFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
-        this.inflater=inflater;
+        this.inflater = inflater;
         Bundle bundle = getArguments();
         position = bundle.getInt("position");
-        Log.d(TAG, "onCreateView:position: " + position+" page:"+page);
+        Log.d(TAG, "onCreateView:position: " + position + " page:" + page);
         view = inflater.inflate(R.layout.news_fragment, null);
 
         switch (position) {
             case 1://新闻
                 url = "http://3g.163.com/touch/reconstruct/article/list/BBM54PGAwangning/%d-10.html";
                 break;
-            case 2://娱乐
+            case 4://娱乐
                 url = "http://3g.163.com/touch/reconstruct/article/list/BA10TA81wangning/%d-10.html";
                 break;
             case 3://NBA
                 url = "https://3g.163.com/touch/reconstruct/article/list/BD2AQH4Qwangning/%d-10.html";
                 break;
-            case 4://体育
+            case 5://体育
                 url = "http://3g.163.com/touch/reconstruct/article/list/BA8E6OEOwangning/%d-10.html";
+                break;
+            case 2://轻松一刻
+                url = "http://3g.163.com/touch/reconstruct/article/list/BD21K0DLwangning/%d-10.html";
                 break;
             default:
                 url = "https://3g.163.com/touch/jsonp/sy/recommend/%d-10.html?hasad=0&offset=0&size=20";
 
                 break;
         }
-        Request request = new Request.Builder().url(String.format(url, page)).build();
 
         unbinder = ButterKnife.bind(this, view);
 
@@ -119,7 +121,7 @@ public class NewsFragment extends Fragment {
                         moreUrl = url + "&refresh=A&miss=00";
                     }
 
-                    loadData(new Request.Builder().url(String.format(moreUrl, page * 10)).build());
+                    loadData(String.format(moreUrl, page * 10));
                 }
             }
 
@@ -133,13 +135,12 @@ public class NewsFragment extends Fragment {
         toutiao_swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadData( new Request.Builder().url(String.format(url, 0)).build());
-
+                loadFirstPage();
             }
         });
 
 
-        loadData( request);
+        loadFirstPage();
 
         return view;
     }
@@ -148,8 +149,9 @@ public class NewsFragment extends Fragment {
     PopupWindow popupWindow;
     CountDownTimer timer;
     View popupView;
-    private void loadData( Request request) {
-        okHttpClient.newCall(request).enqueue(new Callback() {
+
+    private void loadData(String url) {
+        HttpUtil.Request(url, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d(TAG, "onFailure: " + e);
@@ -163,7 +165,7 @@ public class NewsFragment extends Fragment {
                 NewsModel newsModel = gson.fromJson(json, NewsModel.class);
 
                 List<NewsModel.News> dataSrc = newsModel.getNewsList();
-                if (dataSrc==null||dataSrc.size()==0){
+                if (dataSrc == null || dataSrc.size() == 0) {
                     Toast.makeText(view.getContext(), "数据加载出错!", Toast.LENGTH_SHORT).show();
                     toutiao_swip.setRefreshing(false);
                     return;
@@ -173,19 +175,16 @@ public class NewsFragment extends Fragment {
                 //去广告
                 int i = 0;
                 while (i < data.size()) {
-                    NewsCommonModel model=data.get(i);
-                    if (model.getAuthor() == "广告") {
+                    NewsCommonModel model = data.get(i);
+                    if (TextUtils.isEmpty(model.getAuthor()) || model.getAuthor() == "广告"
+                            || TextUtils.isEmpty(model.getUrl())
+                            || TextUtils.isEmpty(model.getImage())) {
                         data.remove(i);
                     }
-                    else if (model.getUrl()==null){
-                        data.remove(i);
-                    }
-                    else if (model.getImage()==null){
-                        data.remove(i);
-                    }
+
+
                     i++;
                 }
-
 
 
                 final Runnable mRunnable = new Runnable() {
@@ -193,11 +192,11 @@ public class NewsFragment extends Fragment {
 
                         if (toutiao_swip.isRefreshing()) {
                             //下拉刷新
-                           int updateCount= adapter.addItem(data);
+                            int updateCount = adapter.addItem(data);
                             toutiao_swip.setRefreshing(false);
-                            TabLayout tab=(TabLayout) getActivity().findViewById(R.id.toutiao_tab);
+                            TabLayout tab = (TabLayout) getActivity().findViewById(R.id.toutiao_tab);
                             if (popupWindow == null) {
-                                popupView= inflater.inflate(R.layout.popup_loadfinish, null);
+                                popupView = inflater.inflate(R.layout.popup_loadfinish, null);
                                 popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                                 ColorDrawable dw = new ColorDrawable(0xb0000000);
                                 popupWindow.setBackgroundDrawable(dw);
@@ -206,7 +205,7 @@ public class NewsFragment extends Fragment {
                                     @Override
                                     public void onDismiss() {
                                         if (timer != null) {
-                                           // timer.cancel();
+                                            // timer.cancel();
                                             timer = null;
                                         }
                                     }
@@ -221,7 +220,7 @@ public class NewsFragment extends Fragment {
                                     popupWindow.showAsDropDown(tab);
                                 }
                             }
-                            if (timer==null){
+                            if (timer == null) {
                                 timer = new CountDownTimer(1000, 1000) {
 
                                     @Override
@@ -235,11 +234,10 @@ public class NewsFragment extends Fragment {
 
                                     }
                                 };
-                               TextView textView= (TextView) popupView.findViewById(R.id.popup_info);
-                                if (updateCount>0){
-                                    textView.setText("更新了"+updateCount+"条数据");
-                                }
-                                else {
+                                TextView textView = (TextView) popupView.findViewById(R.id.popup_info);
+                                if (updateCount > 0) {
+                                    textView.setText("更新了" + updateCount + "条数据");
+                                } else {
                                     textView.setText("已经是最新数据");
                                 }
                                 timer.start();
@@ -256,12 +254,7 @@ public class NewsFragment extends Fragment {
                         }
                     }
                 };
-                new Thread() {
-                    public void run() {
-
-                        handler.post(mRunnable);
-                    }
-                }.start();
+                handler.post(mRunnable);
 
             }
         });
@@ -270,11 +263,15 @@ public class NewsFragment extends Fragment {
     //首页tab点击刷新当前fragment
     @Subscribe
     public void onEvent(RefreshEvent event) {
-        if (event.getTabPosition()!=position){
+        if (event.getTabPosition() != position) {
             return;
         }
         toutiao_swip.setRefreshing(true);
         toutiao_list.scrollToPosition(0);
-        loadData(new Request.Builder().url(String.format(url, 0)).build());
+        loadFirstPage();
+    }
+
+    private void loadFirstPage() {
+        loadData(String.format(url, 0));
     }
 }

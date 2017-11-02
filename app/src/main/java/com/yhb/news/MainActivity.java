@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.yhb.news.adapter.IndexViewPagerAdpater;
+import com.yhb.news.adapter.AppPagerAdapter;
 import com.yhb.news.utils.RefreshEvent;
 import com.yhb.news.views.NoScrollViewPager;
 
@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity {
         getSupportActionBar().hide();
         ButterKnife.bind(this);
 
-        IndexViewPagerAdpater adpater=new IndexViewPagerAdpater(getSupportFragmentManager(),getBaseContext());
+        AppPagerAdapter adpater=new AppPagerAdapter(getSupportFragmentManager(),getBaseContext());
         index_viewpager.setAdapter(adpater);
         index_viewpager.setOffscreenPageLimit(3);
         index_viewpager.setNoScroll(true);

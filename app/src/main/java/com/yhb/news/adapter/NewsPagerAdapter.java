@@ -28,7 +28,7 @@ public class NewsPagerAdapter extends FragmentPagerAdapter {
         this.data = data;
         this.fm = fm;
         fragmentList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < NewsUtil.getCount(); i++) {
             fragmentList.add(new NewsFragment());
         }
     }

@@ -50,9 +50,10 @@ public class NewsUtil {
     static {
         maps.put("0", "头条");
         maps.put("1", "新闻");
-        maps.put("2", "娱乐");
+        maps.put("2", "轻松一刻");
         maps.put("3", "NBA");
-        maps.put("4", "体育");
+        maps.put("4", "娱乐");
+        maps.put("5", "体育");
 
     }
 
@@ -74,7 +75,9 @@ public class NewsUtil {
         }
         return data;
     }
-
+    public static int getCount(){
+      return maps.size();
+    }
     public static String publishTime(String fromDate){
         try {
             SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -35,15 +35,15 @@ import static android.support.design.widget.TabLayout.MODE_SCROLLABLE;
  * Created by smk on 2017/10/20.
  */
 
-public class IndexFragment extends Fragment {
-    private static final String TAG = "IndexFragment";
+public class AppFragment extends Fragment {
+    private static final String TAG = "AppFragment";
     @BindView(R.id.toutiao_tab)
     TabLayout toutiao_tab;
 
     @BindView(R.id.toutiao_viewpager)
     ViewPager toutiao_viewpager;
     private Unbinder unbinder;
-    public IndexFragment() {
+    public AppFragment() {
     }
     Handler handler = new Handler();
     @Override
@@ -61,7 +61,7 @@ public class IndexFragment extends Fragment {
         int position=bundle.getInt("position");
         final View view;
         if (position==0){
-            view=inflater.inflate(R.layout.index_1,null);
+            view=inflater.inflate(R.layout.news_page,null);
             unbinder= ButterKnife.bind(this,view);
 
 
@@ -87,12 +87,12 @@ public class IndexFragment extends Fragment {
             toutiao_tab.setupWithViewPager(toutiao_viewpager);
         }
         else if(position==1) {
-            view=inflater.inflate(R.layout.index_2,null);
+            view=inflater.inflate(R.layout.joke_page,null);
 
             //http://www.laifudao.com/api.asp
         }
         else {
-            view=inflater.inflate(R.layout.index_3,null);
+            view=inflater.inflate(R.layout.meitu_page,null);
             final StaggeredGridLayoutManager staggeredGridLayoutManager=new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL);
             staggeredGridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
             final RecyclerView rv_meinv= (RecyclerView) view.findViewById(R.id.rv_meinv);
@@ -125,7 +125,7 @@ public class IndexFragment extends Fragment {
 
                     final Runnable mRunnable = new Runnable() {
                         public void run() {
-                            MeiNvAdapter adapter = new MeiNvAdapter(inflater, meiNvModel.getHits());
+                            MeiTuAdapter adapter = new MeiTuAdapter(inflater, meiNvModel.getHits());
                             rv_meinv.setAdapter(adapter);
                         }
                     };

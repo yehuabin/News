@@ -30,12 +30,12 @@ import java.util.Map;
  * Created by smk on 2017/10/25.
  */
 
-public class MeiNvAdapter extends RecyclerView.Adapter<MeiNvAdapter.ViewHolder> {
-    private static final String TAG = "MeiNvAdapter";
+public class MeiTuAdapter extends RecyclerView.Adapter<MeiTuAdapter.ViewHolder> {
+    private static final String TAG = "MeiTuAdapter";
     private List<MeiNvModel.HitsBean> data;
     private LayoutInflater inflater;
 
-    public MeiNvAdapter(LayoutInflater inflater, List<MeiNvModel.HitsBean> data) {
+    public MeiTuAdapter(LayoutInflater inflater, List<MeiNvModel.HitsBean> data) {
         this.data = data;
         this.inflater = inflater;
     }
@@ -47,7 +47,7 @@ public class MeiNvAdapter extends RecyclerView.Adapter<MeiNvAdapter.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.meinv_item, null);
+        View view = inflater.inflate(R.layout.meitu_item, null);
 
         return new ViewHolder(view);
     }
