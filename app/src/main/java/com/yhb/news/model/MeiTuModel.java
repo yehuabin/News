@@ -6,7 +6,7 @@ import java.util.List;
  * Created by smk on 2017/10/25.
  */
 
-public class MeiNvModel {
+public class MeiTuModel {
 
 
     private int totalHits;

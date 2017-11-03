@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -28,10 +26,8 @@ public class BroswerActivity extends BaseActivity {
         webView = (WebView) findViewById(R.id.webView);
 
         Bundle bundle = getIntent().getExtras();
+        final String source=bundle.getString("source");
         final String newsUrl = bundle.getString("url");
-        webView.loadUrl(newsUrl);
-        //webView.loadUrl("http://ceshi.sxjz.gov.cn/bmtzgg/content_196215");
-
 
         webView.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -48,30 +44,35 @@ public class BroswerActivity extends BaseActivity {
         });
         webView.setWebViewClient(new WebViewClient() {
             @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                webView.loadUrl("javascript:$(\".doc-footer-wrapper,header,.js-topad,.js-altop,.js-columsADBlowContent,.icon_index\").remove()");
-            }
-
-            @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-                return super.shouldInterceptRequest(view,request);
-            }
-
-            @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                Log.d(TAG, "shouldOverrideUrlLoading: "+url);
+                if (url.indexOf("163.com")==-1){
+                    return true;
+                }
 
-               return true;
+               return false;
             }
 
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                Log.d(TAG, "shouldOverrideUrlLoading2: "+request.getUrl());
-                return true;
+            public void onPageFinished(WebView view, String url) {
+                Log.d(TAG, "onPageFinished: "+url);
+                super.onPageFinished(view, url);
+                    webView.loadUrl("javascript:if($('.doc-footer-wrapper')){$('.doc-footer-wrapper').remove();}" +
+                            "if($('.js-topad')){$('.js-topad').remove();}" +
+                            "if($('.js-altop')){$('.js-altop').remove();}" +
+                            "if($('.js-columsADBlowContent')){$('.js-columsADBlowContent').remove();}" +
+                            "if($('.icon_index')){$('.icon_index').remove();}" +
+                            "if($('.js-slider')){$('.js-slider').remove();}" +
+                            "if($('.redpacket-wrap')){$('.redpacket-wrap').remove();}" +
+                            "if($('header')){$('header').remove();}");
             }
+
         });
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+
+        webView.loadUrl(newsUrl);
     }
 
     @Override

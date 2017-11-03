@@ -54,7 +54,6 @@ public class NewsUtil {
         maps.put("3", "NBA");
         maps.put("4", "娱乐");
         maps.put("5", "体育");
-
     }
 
     public static String getVal(String key) {

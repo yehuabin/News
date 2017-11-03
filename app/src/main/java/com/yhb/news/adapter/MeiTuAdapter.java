@@ -20,7 +20,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.yhb.news.R;
-import com.yhb.news.model.MeiNvModel;
+import com.yhb.news.model.MeiTuModel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,10 +32,10 @@ import java.util.Map;
 
 public class MeiTuAdapter extends RecyclerView.Adapter<MeiTuAdapter.ViewHolder> {
     private static final String TAG = "MeiTuAdapter";
-    private List<MeiNvModel.HitsBean> data;
+    private List<MeiTuModel.HitsBean> data;
     private LayoutInflater inflater;
 
-    public MeiTuAdapter(LayoutInflater inflater, List<MeiNvModel.HitsBean> data) {
+    public MeiTuAdapter(LayoutInflater inflater, List<MeiTuModel.HitsBean> data) {
         this.data = data;
         this.inflater = inflater;
     }

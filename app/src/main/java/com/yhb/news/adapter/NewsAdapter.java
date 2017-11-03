@@ -15,6 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.yhb.news.BroswerActivity;
 import com.yhb.news.R;
 import com.yhb.news.model.NewsCommonModel;
+import com.yhb.news.utils.ConstantUtil;
 import com.yhb.news.utils.NewsUtil;
 
 import java.util.List;
@@ -24,8 +25,7 @@ import java.util.List;
  */
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private int CONTENT_ITEM = 1;
-    private int FOOT_ITEM = 2;
+
     LayoutInflater inflater;
     List<NewsCommonModel> data;
 
@@ -39,7 +39,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder;
         View view;
-        if (viewType == CONTENT_ITEM) {
+        if (viewType == ConstantUtil.CONTENT_ITEM) {
             view = inflater.inflate(R.layout.news_item, parent, false);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -115,9 +115,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         if (position == data.size()) {
-            return FOOT_ITEM;
+            return ConstantUtil.FOOT_ITEM;
         }
-        return CONTENT_ITEM;
+        return ConstantUtil.CONTENT_ITEM;
     }
 
     @Override

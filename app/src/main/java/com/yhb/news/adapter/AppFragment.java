@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.yhb.news.R;
-import com.yhb.news.model.MeiNvModel;
+import com.yhb.news.model.MeiTuModel;
+import com.yhb.news.utils.HttpUtil;
+import com.yhb.news.utils.JokeUtil;
 import com.yhb.news.utils.NewsUtil;
 
 import java.io.IOException;
@@ -25,8 +27,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 
 import static android.support.design.widget.TabLayout.MODE_SCROLLABLE;
@@ -43,26 +43,29 @@ public class AppFragment extends Fragment {
     @BindView(R.id.toutiao_viewpager)
     ViewPager toutiao_viewpager;
     private Unbinder unbinder;
+
     public AppFragment() {
     }
+
     Handler handler = new Handler();
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (unbinder!=null){
-        unbinder.unbind();
+        if (unbinder != null) {
+            unbinder.unbind();
         }
     }
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Bundle bundle=getArguments();
-        int position=bundle.getInt("position");
+        Bundle bundle = getArguments();
+        int position = bundle.getInt("position");
         final View view;
-        if (position==0){
-            view=inflater.inflate(R.layout.news_page,null);
-            unbinder= ButterKnife.bind(this,view);
+        if (position == 0) {
+            view = inflater.inflate(R.layout.news_page, null);
+            unbinder = ButterKnife.bind(this, view);
 
 
 //            toutiao_tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -85,17 +88,20 @@ public class AppFragment extends Fragment {
             NewsPagerAdapter adapter = new NewsPagerAdapter(getFragmentManager(), view.getContext(), NewsUtil.getData());
             toutiao_viewpager.setAdapter(adapter);
             toutiao_tab.setupWithViewPager(toutiao_viewpager);
-        }
-        else if(position==1) {
-            view=inflater.inflate(R.layout.joke_page,null);
+        } else if (position == 1) {
+            view = inflater.inflate(R.layout.joke_page, null);
+            TabLayout tab_joke = (TabLayout) view.findViewById(R.id.tab_joke);
+            ViewPager vp_joke = (ViewPager) view.findViewById(R.id.vp_joke);
+            //tab_joke.setTabMode(MODE_SCROLLABLE);
+            JokePagerAdapter jokePagerAdapter = new JokePagerAdapter(getFragmentManager(), view.getContext(), JokeUtil.getData());
+            vp_joke.setAdapter(jokePagerAdapter);
+            tab_joke.setupWithViewPager(vp_joke);
 
-            //http://www.laifudao.com/api.asp
-        }
-        else {
-            view=inflater.inflate(R.layout.meitu_page,null);
-            final StaggeredGridLayoutManager staggeredGridLayoutManager=new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL);
+        } else {
+            view = inflater.inflate(R.layout.meitu_page, null);
+            final StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL);
             staggeredGridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-            final RecyclerView rv_meinv= (RecyclerView) view.findViewById(R.id.rv_meinv);
+            final RecyclerView rv_meinv = (RecyclerView) view.findViewById(R.id.rv_meinv);
             rv_meinv.setLayoutManager(staggeredGridLayoutManager);
             rv_meinv.setHasFixedSize(true);
             rv_meinv.addItemDecoration(new SpaceItemDecoration(8));
@@ -107,10 +113,8 @@ public class AppFragment extends Fragment {
                     staggeredGridLayoutManager.invalidateSpanAssignments();
                 }
             });
-            String url="https://pixabay.com/api/?key=6846383-1d7046f0aa07d2bdfe38f945f&per_page=50&image_type=photo&catetory=fashion&editors_choice=true";
-            Request request=new Request.Builder().url(url).build();
-            OkHttpClient okHttpClient=new OkHttpClient();
-            okHttpClient.newCall(request).enqueue(new Callback() {
+            String url = "https://pixabay.com/api/?key=6846383-1d7046f0aa07d2bdfe38f945f&per_page=50&image_type=photo&catetory=fashion&editors_choice=true";
+            HttpUtil.Request(url, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
 
@@ -120,21 +124,16 @@ public class AppFragment extends Fragment {
                 public void onResponse(Call call, Response response) throws IOException {
                     String json = response.body().string();
                     Gson gson = new Gson();
-                    final MeiNvModel meiNvModel = gson.fromJson(json, MeiNvModel.class);
+                    final MeiTuModel meiTuModel = gson.fromJson(json, MeiTuModel.class);
 
 
                     final Runnable mRunnable = new Runnable() {
                         public void run() {
-                            MeiTuAdapter adapter = new MeiTuAdapter(inflater, meiNvModel.getHits());
+                            MeiTuAdapter adapter = new MeiTuAdapter(inflater, meiTuModel.getHits());
                             rv_meinv.setAdapter(adapter);
                         }
                     };
-                    new Thread() {
-                        @Override
-                        public void run() {
-                            handler.post(mRunnable);
-                        }
-                    }.start();
+                    handler.post(mRunnable);
                 }
             });
         }
