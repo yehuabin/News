@@ -103,6 +103,16 @@ public class GenTieModel {
         private UserBean user;
         private String siteName;
 
+        public String getPostId() {
+            return postId;
+        }
+
+        public void setPostId(String postId) {
+            this.postId = postId;
+        }
+
+        private String postId;
+
         public int getFavCount() {
             return favCount;
         }
@@ -212,9 +222,13 @@ public class GenTieModel {
 
     @Override
     public boolean equals(Object obj) {
+        if (obj==null||!(obj instanceof GenTieModel)) {
+            return false;
+        }
         GenTieModel other=(GenTieModel) obj;
-        if (other.getComments().size()==this.getComments().size()&&
-                other.getComments().get(0).getCreateTime().equals(this.getComments().get(0).getCreateTime())){
+        if (other.getThread().getUrl().equals(this.getThread().getUrl())&&
+                other.getComments().size()==this.getComments().size()
+                ){
             return true;
         }
         return false;

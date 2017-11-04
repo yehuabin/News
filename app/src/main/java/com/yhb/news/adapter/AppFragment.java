@@ -113,7 +113,7 @@ public class AppFragment extends Fragment {
                     staggeredGridLayoutManager.invalidateSpanAssignments();
                 }
             });
-            String url = "https://pixabay.com/api/?key=6846383-1d7046f0aa07d2bdfe38f945f&per_page=50&image_type=photo&catetory=fashion&editors_choice=true";
+            String url = "https://stocksnap.io/api/load-photos/date/desc/1";
             HttpUtil.Request(url, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
@@ -129,7 +129,7 @@ public class AppFragment extends Fragment {
 
                     final Runnable mRunnable = new Runnable() {
                         public void run() {
-                            MeiTuAdapter adapter = new MeiTuAdapter(inflater, meiTuModel.getHits());
+                            MeiTuAdapter adapter = new MeiTuAdapter(inflater, meiTuModel.getResults());
                             rv_meinv.setAdapter(adapter);
                         }
                     };

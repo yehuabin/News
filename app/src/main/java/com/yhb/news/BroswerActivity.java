@@ -57,14 +57,7 @@ public class BroswerActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 Log.d(TAG, "onPageFinished: "+url);
                 super.onPageFinished(view, url);
-                    webView.loadUrl("javascript:if($('.doc-footer-wrapper')){$('.doc-footer-wrapper').remove();}" +
-                            "if($('.js-topad')){$('.js-topad').remove();}" +
-                            "if($('.js-altop')){$('.js-altop').remove();}" +
-                            "if($('.js-columsADBlowContent')){$('.js-columsADBlowContent').remove();}" +
-                            "if($('.icon_index')){$('.icon_index').remove();}" +
-                            "if($('.js-slider')){$('.js-slider').remove();}" +
-                            "if($('.redpacket-wrap')){$('.redpacket-wrap').remove();}" +
-                            "if($('header')){$('header').remove();}");
+                webView.loadUrl("javascript:$(\".doc-footer-wrapper,header,.js-topad,.js-altop,.js-columsADBlowContent,.icon_index\").remove()");
             }
 
         });

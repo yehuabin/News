@@ -32,10 +32,10 @@ import java.util.Map;
 
 public class MeiTuAdapter extends RecyclerView.Adapter<MeiTuAdapter.ViewHolder> {
     private static final String TAG = "MeiTuAdapter";
-    private List<MeiTuModel.HitsBean> data;
+    private List<MeiTuModel.ResultsBean> data;
     private LayoutInflater inflater;
 
-    public MeiTuAdapter(LayoutInflater inflater, List<MeiTuModel.HitsBean> data) {
+    public MeiTuAdapter(LayoutInflater inflater, List<MeiTuModel.ResultsBean> data) {
         this.data = data;
         this.inflater = inflater;
     }
@@ -62,7 +62,8 @@ public class MeiTuAdapter extends RecyclerView.Adapter<MeiTuAdapter.ViewHolder> 
             ViewGroup.LayoutParams layoutParams = holder.thumb.getLayoutParams();
             layoutParams.height = mHeights.get(position);
         }
-        Glide.with(holder.itemView.getContext()).asBitmap().load(data.get(position).getPreviewURL())
+        String url="https://cdn.stocksnap.io/img-thumbs/280h/"+data.get(position).getImg_id()+".jpg";
+        Glide.with(holder.itemView.getContext()).asBitmap().load(url)
                 .transition(BitmapTransitionOptions.withCrossFade(500))
                 .listener(new RequestListener<Bitmap>() {
                     @Override

@@ -14,7 +14,7 @@ public class JokeUtil {
 
     static {
         maps.put("0", "跟帖");
-        maps.put("1", "漫画");
+        maps.put("1", "笑话");
 
     }
     public static String getVal(String key) {

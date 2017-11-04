@@ -27,7 +27,7 @@ public class AppPagerAdapter extends FragmentPagerAdapter {
         this.context=context;
         data=new ArrayList<>();
         data.add("资讯");
-        data.add("笑话");
+        data.add("幽默");
         data.add("美图");
     }
 

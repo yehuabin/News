@@ -29,7 +29,7 @@ public class JokePagerAdapter extends FragmentPagerAdapter {
         this.fm = fm;
         fragmentList = new ArrayList<>();
         fragmentList.add(new GenTieFragment());
-        fragmentList.add(new GenTieFragment());
+        fragmentList.add(new XiaoHuaFragment());
     }
 
     @Override
