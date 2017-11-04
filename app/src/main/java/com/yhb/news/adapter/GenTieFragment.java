@@ -3,7 +3,6 @@ package com.yhb.news.adapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,24 +38,16 @@ public class GenTieFragment extends Fragment {
     RecyclerView rv_joke;
     String url;
     View view;
-    SwipeRefreshLayout swip_joke;
+
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.joke_fragment, container, false);
+        view = inflater.inflate(R.layout.gentie_fragment, container, false);
         this.inflater = inflater;
         url = "https://3g.163.com/touch/jsonp/hot/comments/%d-10.html";
         rv_joke = (RecyclerView) view.findViewById(R.id.rv_joke);
-        swip_joke = (SwipeRefreshLayout) view.findViewById(R.id.swipe_joke);
-        swip_joke.setColorSchemeResources(android.R.color.holo_red_light, android.R.color.holo_blue_bright, android.R.color.holo_green_light);
-        swip_joke.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadData(String.format(url, 0));
-            }
-        });
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(inflater.getContext());
         rv_joke.setItemAnimator(new DefaultItemAnimator());
@@ -102,14 +93,11 @@ public class GenTieFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (swip_joke.isRefreshing()) {
-                            swip_joke.setRefreshing(false);
-                            adapter.addItem(genTieModels);
-                        } else if (page > 0) {
+                        if (page > 0) {
                             //上拉加载更多
                             adapter.addMoreItem(genTieModels);
                         } else {
-                            //first load
+                            //第一次加载
                             LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.line_progress);
                             linearLayout.setVisibility(View.GONE);
                             adapter = new GenTieAdapter(inflater, genTieModels);

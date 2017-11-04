@@ -38,7 +38,7 @@ public class GenTieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         RecyclerView.ViewHolder viewHolder;
         View view;
         if (viewType == CONTENT_ITEM) {
-            view = inflater.inflate(R.layout.joke_item, parent, false);
+            view = inflater.inflate(R.layout.gentie_item, parent, false);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

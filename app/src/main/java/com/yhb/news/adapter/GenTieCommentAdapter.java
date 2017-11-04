@@ -40,7 +40,7 @@ public class GenTieCommentAdapter extends RecyclerView.Adapter<GenTieCommentAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.joke_comment,null);
+        View view=inflater.inflate(R.layout.gentie_comment,null);
         return new ViewHolder(view);
     }
 
