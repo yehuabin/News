@@ -6,28 +6,18 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
 import com.yhb.news.R;
-import com.yhb.news.model.MeiTuModel;
-import com.yhb.news.utils.HttpUtil;
 import com.yhb.news.utils.JokeUtil;
+import com.yhb.news.utils.MeiTuUtil;
 import com.yhb.news.utils.NewsUtil;
-
-import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 import static android.support.design.widget.TabLayout.MODE_SCROLLABLE;
 
@@ -67,23 +57,6 @@ public class AppFragment extends Fragment {
             view = inflater.inflate(R.layout.news_page, null);
             unbinder = ButterKnife.bind(this, view);
 
-
-//            toutiao_tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//                @Override
-//                public void onTabSelected(TabLayout.Tab tab) {
-//                    tab.getText();
-//                }
-//
-//                @Override
-//                public void onTabUnselected(TabLayout.Tab tab) {
-//
-//                }
-//
-//                @Override
-//                public void onTabReselected(TabLayout.Tab tab) {
-//
-//                }
-//            });
             toutiao_tab.setTabMode(MODE_SCROLLABLE);
             NewsPagerAdapter adapter = new NewsPagerAdapter(getFragmentManager(), view.getContext(), NewsUtil.getData());
             toutiao_viewpager.setAdapter(adapter);
@@ -99,43 +72,12 @@ public class AppFragment extends Fragment {
 
         } else {
             view = inflater.inflate(R.layout.meitu_page, null);
-            final StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL);
-            staggeredGridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-            final RecyclerView rv_meinv = (RecyclerView) view.findViewById(R.id.rv_meinv);
-            rv_meinv.setLayoutManager(staggeredGridLayoutManager);
-            rv_meinv.setHasFixedSize(true);
-            rv_meinv.addItemDecoration(new SpaceItemDecoration(8));
-
-            rv_meinv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                @Override
-                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                    super.onScrollStateChanged(recyclerView, newState);
-                    staggeredGridLayoutManager.invalidateSpanAssignments();
-                }
-            });
-            String url = "https://stocksnap.io/api/load-photos/date/desc/1";
-            HttpUtil.Request(url, new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    String json = response.body().string();
-                    Gson gson = new Gson();
-                    final MeiTuModel meiTuModel = gson.fromJson(json, MeiTuModel.class);
-
-
-                    final Runnable mRunnable = new Runnable() {
-                        public void run() {
-                            MeiTuAdapter adapter = new MeiTuAdapter(inflater, meiTuModel.getResults());
-                            rv_meinv.setAdapter(adapter);
-                        }
-                    };
-                    handler.post(mRunnable);
-                }
-            });
+            TabLayout tab_meitu = (TabLayout) view.findViewById(R.id.tab_meitu);
+            ViewPager vp_meitu = (ViewPager) view.findViewById(R.id.vp_meitu);
+            //tab_joke.setTabMode(MODE_SCROLLABLE);
+            MeiTuPagerAdapter meiTuPagerAdapter = new MeiTuPagerAdapter(getFragmentManager(), view.getContext(), MeiTuUtil.getData());
+            vp_meitu.setAdapter(meiTuPagerAdapter);
+            tab_meitu.setupWithViewPager(vp_meitu);
         }
 
         return view;

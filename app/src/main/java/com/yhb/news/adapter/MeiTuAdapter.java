@@ -26,16 +26,19 @@ import com.bumptech.glide.request.target.Target;
 import com.yhb.news.BigImageActivity;
 import com.yhb.news.R;
 import com.yhb.news.model.MeiTuModel;
+import com.yhb.news.utils.ConstantUtil;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.yhb.news.utils.ConstantUtil.CONTENT_ITEM;
+
 /**
  * Created by smk on 2017/10/25.
  */
 
-public class MeiTuAdapter extends RecyclerView.Adapter<MeiTuAdapter.ViewHolder> {
+public class MeiTuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = "MeiTuAdapter";
     private List<MeiTuModel.ResultsBean> data;
     private LayoutInflater inflater;
@@ -45,16 +48,24 @@ public class MeiTuAdapter extends RecyclerView.Adapter<MeiTuAdapter.ViewHolder> 
         this.inflater = inflater;
     }
 
+
     @Override
     public int getItemCount() {
-        return data.size();
+        return data.size() + 1;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.meitu_item, null);
-
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        RecyclerView.ViewHolder viewHolder;
+        View view;
+        if (viewType == CONTENT_ITEM) {
+            view = inflater.inflate(R.layout.meitu_item, parent, false);
+            viewHolder = new ContentViewHolder(view);
+        } else {
+            view = inflater.inflate(R.layout.foot_loadmore_item, parent, false);
+            viewHolder = new FootViewHolder(view);
+        }
+        return viewHolder;
     }
 
     //http://www.jianshu.com/p/5761fa9b7414
@@ -62,43 +73,59 @@ public class MeiTuAdapter extends RecyclerView.Adapter<MeiTuAdapter.ViewHolder> 
     private Map<Integer, Integer> mHeights = new HashMap<>();
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        if (mHeights.containsKey(position)) {
-            ViewGroup.LayoutParams layoutParams = holder.thumb.getLayoutParams();
-            layoutParams.height = mHeights.get(position);
-        }
-        holder.thumb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(inflater.getContext(), BigImageActivity.class);
-                intent.putExtra("url","https://cdn.stocksnap.io/img-thumbs/960w/"+data.get(position).getImg_id()+".jpg");
-                ActivityCompat.startActivity(inflater.getContext(), intent, ActivityOptions.makeSceneTransitionAnimation((Activity) inflater.getContext(), v, "sharedView").toBundle());
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        if (holder instanceof ContentViewHolder) {
+            final ContentViewHolder contentViewHolder=(ContentViewHolder)holder;
+            if (mHeights.containsKey(position)) {
+                ViewGroup.LayoutParams layoutParams = contentViewHolder.thumb.getLayoutParams();
+                layoutParams.height = mHeights.get(position);
             }
-        });
-        String url="https://cdn.stocksnap.io/img-thumbs/280h/"+data.get(position).getImg_id()+".jpg";
-        Glide.with(holder.itemView.getContext()).asBitmap().load(url)
-                .transition(BitmapTransitionOptions.withCrossFade(500))
-                .listener(new RequestListener<Bitmap>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
-                        return false;
-                    }
+            contentViewHolder.thumb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(inflater.getContext(), BigImageActivity.class);
+                    intent.putExtra("url", "https://cdn.stocksnap.io/img-thumbs/960w/" + data.get(position).getImg_id() + ".jpg");
+                    ActivityCompat.startActivity(inflater.getContext(), intent, ActivityOptions.makeSceneTransitionAnimation((Activity) inflater.getContext(), v, "sharedView").toBundle());
+                }
+            });
+            String url = "https://cdn.stocksnap.io/img-thumbs/280h/" + data.get(position).getImg_id() + ".jpg";
+            Glide.with(holder.itemView.getContext()).asBitmap().load(url)
+                    .transition(BitmapTransitionOptions.withCrossFade(500))
+                    .listener(new RequestListener<Bitmap>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                            return false;
+                        }
 
-                    @Override
-                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                        int imageViewWidth = getScreenWidth(inflater.getContext()) / 2;
-                        int imageViewHeight = (int) ((double) imageViewWidth / resource.getWidth()) * resource.getHeight();
-                        mHeights.put(position, imageViewHeight);
-                        ViewGroup.LayoutParams layoutParams = holder.thumb.getLayoutParams();
-                        layoutParams.height = imageViewHeight;
-                        layoutParams.width = imageViewWidth;
-                        return false;
-                    }
-                })
-                .into(holder.thumb);
-
+                        @Override
+                        public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                            int imageViewWidth = getScreenWidth(inflater.getContext()) / 2;
+                            int imageViewHeight = (int) ((double) imageViewWidth / resource.getWidth()) * resource.getHeight();
+                            mHeights.put(position, imageViewHeight);
+                            ViewGroup.LayoutParams layoutParams = contentViewHolder.thumb.getLayoutParams();
+                            layoutParams.height = imageViewHeight;
+                            layoutParams.width = imageViewWidth;
+                            return false;
+                        }
+                    })
+                    .into(contentViewHolder.thumb);
+        }
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (position == data.size()) {
+            return ConstantUtil.FOOT_ITEM;
+        }
+        return CONTENT_ITEM;
+    }
+    public void addMoreItem(List<MeiTuModel.ResultsBean> newDatas) {
+
+        data.addAll(newDatas);
+
+        notifyDataSetChanged();
+
+    }
     public static Bitmap zoomImg(Bitmap bm, int newWidth, int newHeight) {
         // 获得图片的宽高
         int width = bm.getWidth();
@@ -123,16 +150,26 @@ public class MeiTuAdapter extends RecyclerView.Adapter<MeiTuAdapter.ViewHolder> 
         return outMetrics.widthPixels;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+
+
+    public static class ContentViewHolder extends RecyclerView.ViewHolder {
 
         public TextView title;
         public ImageView thumb;
 
-        public ViewHolder(View itemView) {
+        public ContentViewHolder(View itemView) {
             super(itemView);
 
             thumb = (ImageView) itemView.findViewById(R.id.iv_thumb);
 
+        }
+    }
+
+    public static class FootViewHolder extends RecyclerView.ViewHolder {
+
+        public FootViewHolder(View itemView) {
+            super(itemView);
         }
     }
 }

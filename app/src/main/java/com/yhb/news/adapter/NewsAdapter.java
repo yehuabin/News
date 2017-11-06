@@ -54,7 +54,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             });
             viewHolder = new ContentViewHolder(view);
         } else {
-            view = inflater.inflate(R.layout.news_foot_item, parent, false);
+            view = inflater.inflate(R.layout.foot_loadmore_item, parent, false);
             viewHolder = new FootViewHolder(view);
         }
         return viewHolder;

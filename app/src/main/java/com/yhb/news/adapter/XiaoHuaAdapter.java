@@ -45,7 +45,7 @@ public class XiaoHuaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             view=inflater.inflate(R.layout.xiaohua_item,null);
             viewHolder = new ContentViewHolder(view);
         } else {
-            view = inflater.inflate(R.layout.news_foot_item, parent, false);
+            view = inflater.inflate(R.layout.foot_loadmore_item, parent, false);
             viewHolder = new FootViewHolder(view);
         }
 
