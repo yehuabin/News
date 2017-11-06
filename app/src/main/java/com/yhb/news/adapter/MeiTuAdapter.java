@@ -1,9 +1,13 @@
 package com.yhb.news.adapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -19,6 +23,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.yhb.news.BigImageActivity;
 import com.yhb.news.R;
 import com.yhb.news.model.MeiTuModel;
 
@@ -62,6 +67,14 @@ public class MeiTuAdapter extends RecyclerView.Adapter<MeiTuAdapter.ViewHolder> 
             ViewGroup.LayoutParams layoutParams = holder.thumb.getLayoutParams();
             layoutParams.height = mHeights.get(position);
         }
+        holder.thumb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(inflater.getContext(), BigImageActivity.class);
+                intent.putExtra("url","https://cdn.stocksnap.io/img-thumbs/960w/"+data.get(position).getImg_id()+".jpg");
+                ActivityCompat.startActivity(inflater.getContext(), intent, ActivityOptions.makeSceneTransitionAnimation((Activity) inflater.getContext(), v, "sharedView").toBundle());
+            }
+        });
         String url="https://cdn.stocksnap.io/img-thumbs/280h/"+data.get(position).getImg_id()+".jpg";
         Glide.with(holder.itemView.getContext()).asBitmap().load(url)
                 .transition(BitmapTransitionOptions.withCrossFade(500))
