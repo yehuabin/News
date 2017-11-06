@@ -15,6 +15,8 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.hugeterry.updatefun.UpdateFunGO;
+import cn.hugeterry.updatefun.config.UpdateKey;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
@@ -30,6 +32,12 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+        UpdateKey.API_TOKEN = "c111a91b782f380bc3c3fec232ca0a5a";
+        UpdateKey.APP_ID = "59fbf4b4ca87a808ea000149";
+//下载方式:
+//UpdateKey.DialogOrNotification=UpdateKey.WITH_DIALOG;通过Dialog来进行下载
+//UpdateKey.DialogOrNotification=UpdateKey.WITH_NOTIFITION;通过通知栏来进行下载(默认)
+        UpdateFunGO.init(this);
         ButterKnife.bind(this);
 
         AppPagerAdapter adpater=new AppPagerAdapter(getSupportFragmentManager(),getBaseContext());
@@ -75,5 +83,15 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UpdateFunGO.onResume(this);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        UpdateFunGO.onStop(this);
     }
 }
