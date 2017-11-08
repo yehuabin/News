@@ -13,8 +13,23 @@ public class MeiTuUtil {
     private static Map<String, String> maps = new HashMap<>();
 
     static {
-        maps.put("0", "latest");
+        maps.put("0", "popular");
         maps.put("1", "girl");
+        maps.put("2", "love");
+        maps.put("3", "family");
+        maps.put("4", "baby");
+        maps.put("5", "happy");
+        maps.put("6", "wedding");
+        maps.put("7", "nature");
+        maps.put("8", "sunrise");
+        maps.put("9", "stars");
+        maps.put("10", "hair");
+        maps.put("11", "beauty");
+        maps.put("12", "water");
+        maps.put("13", "fashion");
+        maps.put("14", "feet");
+        maps.put("15", "couple");
+        maps.put("16", "party");
 
     }
     public static String getVal(String key) {

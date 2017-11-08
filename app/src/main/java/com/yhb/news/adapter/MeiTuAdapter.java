@@ -5,10 +5,10 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +43,22 @@ public class MeiTuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<MeiTuModel.ResultsBean> data;
     private LayoutInflater inflater;
 
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
+        if( lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams ) {
+            StaggeredGridLayoutManager.LayoutParams  params =(StaggeredGridLayoutManager.LayoutParams) lp;
+            if(holder.getItemViewType()==ConstantUtil.FOOT_ITEM ){
+                params.setFullSpan(true);
+            }else{
+                params.setFullSpan(false);
+            }
+        }
+
+
+    }
+
     public MeiTuAdapter(LayoutInflater inflater, List<MeiTuModel.ResultsBean> data) {
         this.data = data;
         this.inflater = inflater;
@@ -75,16 +91,16 @@ public class MeiTuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ContentViewHolder) {
-            final ContentViewHolder contentViewHolder=(ContentViewHolder)holder;
+            final ContentViewHolder contentViewHolder = (ContentViewHolder) holder;
             if (mHeights.containsKey(position)) {
                 ViewGroup.LayoutParams layoutParams = contentViewHolder.thumb.getLayoutParams();
                 layoutParams.height = mHeights.get(position);
             }
-            contentViewHolder.thumb.setOnClickListener(new View.OnClickListener() {
+            contentViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(inflater.getContext(), BigImageActivity.class);
-                    intent.putExtra("url", "https://cdn.stocksnap.io/img-thumbs/960w/" + data.get(position).getImg_id() + ".jpg");
+                    intent.putExtra("url", "https://cdn.stocksnap.io/img-thumbs/280h/" + data.get(position).getImg_id() + ".jpg");
                     ActivityCompat.startActivity(inflater.getContext(), intent, ActivityOptions.makeSceneTransitionAnimation((Activity) inflater.getContext(), v, "sharedView").toBundle());
                 }
             });
@@ -119,26 +135,13 @@ public class MeiTuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
         return CONTENT_ITEM;
     }
+
     public void addMoreItem(List<MeiTuModel.ResultsBean> newDatas) {
 
         data.addAll(newDatas);
 
         notifyDataSetChanged();
 
-    }
-    public static Bitmap zoomImg(Bitmap bm, int newWidth, int newHeight) {
-        // 获得图片的宽高
-        int width = bm.getWidth();
-        int height = bm.getHeight();
-        // 计算缩放比例
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-        // 取得想要缩放的matrix参数
-        Matrix matrix = new Matrix();
-        matrix.postScale(scaleWidth, scaleHeight);
-        // 得到新的图片
-        Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
-        return newbm;
     }
 
     //获取屏幕宽度的方法
@@ -149,8 +152,6 @@ public class MeiTuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         wm.getDefaultDisplay().getMetrics(outMetrics);
         return outMetrics.widthPixels;
     }
-
-
 
 
     public static class ContentViewHolder extends RecyclerView.ViewHolder {

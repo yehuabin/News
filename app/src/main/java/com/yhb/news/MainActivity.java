@@ -3,6 +3,7 @@ package com.yhb.news;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,7 +71,7 @@ public class MainActivity extends BaseActivity {
                 textView.setTextColor(Color.parseColor("#767676"));
                 ImageView imageView= (ImageView) view.findViewById(R.id.index_image);
                 imageView.setImageResource((int)imageView.getTag(R.id.img_unselected));
-
+                Log.d(TAG, "onTabUnselected: ");
             }
 
             @Override
@@ -80,9 +81,10 @@ public class MainActivity extends BaseActivity {
 
                     EventBus.getDefault().post(new RefreshEvent(tabLayout.getSelectedTabPosition()));
                 }
+                Log.d(TAG, "onTabReselected: ");
             }
         });
-
+       
     }
     @Override
     protected void onResume() {

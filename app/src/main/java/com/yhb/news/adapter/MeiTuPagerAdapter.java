@@ -28,8 +28,9 @@ public class MeiTuPagerAdapter extends FragmentPagerAdapter {
         this.data = data;
         this.fm = fm;
         fragmentList = new ArrayList<>();
-        fragmentList.add(new MeiTuFragment());
-        fragmentList.add(new MeiTuFragment());
+        for (int i=0;i<MeiTuUtil.getData().size();i++) {
+            fragmentList.add(new MeiTuFragment());
+        }
     }
 
     @Override

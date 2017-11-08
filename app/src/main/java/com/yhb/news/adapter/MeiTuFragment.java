@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.yhb.news.R;
 import com.yhb.news.model.MeiTuModel;
 import com.yhb.news.utils.HttpUtil;
+import com.yhb.news.utils.MeiTuUtil;
 
 import java.io.IOException;
 
@@ -45,7 +46,8 @@ public class MeiTuFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        this.inflater=inflater;
+        this.inflater = inflater;
+        int position=getArguments().getInt("position");
         view = inflater.inflate(R.layout.meitu_fragment, container, false);
         final StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL);
         staggeredGridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
@@ -53,8 +55,6 @@ public class MeiTuFragment extends Fragment {
         rv_meitu.setLayoutManager(staggeredGridLayoutManager);
         rv_meitu.setHasFixedSize(true);
         rv_meitu.addItemDecoration(new SpaceItemDecoration(8));
-
-
         rv_meitu.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
 
@@ -74,47 +74,55 @@ public class MeiTuFragment extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                int[] positions= staggeredGridLayoutManager.findLastVisibleItemPositions(null);
-                lastVisibleItem=Math.max(positions[0],positions[1]);
-                Log.d(TAG, "onScrolled: positions[0]"+positions[0]+" positions[1]:"+positions[0]);
+                int[] positions = staggeredGridLayoutManager.findLastVisibleItemPositions(null);
+                lastVisibleItem = Math.max(positions[0], positions[1]);
+                Log.d(TAG, "onScrolled: positions[0]" + positions[0] + " positions[1]:" + positions[0]);
             }
         });
-       // url = "https://stocksnap.io/api/load-photos/date/desc/%d";
-        url = "https://stocksnap.io/api/search-photos/girl/relevance/desc/%d";
+        switch (position){
+            case 0:
+                url = "https://stocksnap.io/api/load-photos/date/desc/%d";
+                break;
+            default:
+                url = "https://stocksnap.io/api/search-photos/"+ MeiTuUtil.getVal(String.valueOf(position))+"/relevance/desc/%d";
+        }
+        // url = "https://stocksnap.io/api/load-photos/date/desc/%d";
+
         //girl https://stocksnap.io/api/search-photos/girl/relevance/desc/1
         //girl https://stocksnap.io/api/search-photos/girl/relevance/desc/1
-       loadData(String.format(url,page));
+        loadData(String.format(url, page));
         return view;
     }
-private void loadData(String url){
-    HttpUtil.Request(url, new Callback() {
-        @Override
-        public void onFailure(Call call, IOException e) {
 
-        }
+    private void loadData(final String url) {
+        HttpUtil.Request(url, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
 
-        @Override
-        public void onResponse(Call call, Response response) throws IOException {
-            String json = response.body().string();
-            Gson gson = new Gson();
-            final MeiTuModel meiTuModel = gson.fromJson(json, MeiTuModel.class);
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (page>1){
-                      adapter.addMoreItem(meiTuModel.getResults());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d(TAG, "onResponse: "+url);
+                String json = response.body().string();
+                Gson gson = new Gson();
+                final MeiTuModel meiTuModel = gson.fromJson(json, MeiTuModel.class);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (page > 1) {
+                            adapter.addMoreItem(meiTuModel.getResults());
+                        } else {
+                            LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.line_progress);
+                            linearLayout.setVisibility(View.GONE);
+                            adapter = new MeiTuAdapter(inflater, meiTuModel.getResults());
+                            rv_meitu.setAdapter(adapter);
+                        }
                     }
-                   else {
-                        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.line_progress);
-                        linearLayout.setVisibility(View.GONE);
-                        adapter = new MeiTuAdapter(inflater, meiTuModel.getResults());
-                        rv_meitu.setAdapter(adapter);
-                    }
-                }
-            });
+                });
 
 
-        }
-    });
-}
+            }
+        });
+    }
 }

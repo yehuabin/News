@@ -65,7 +65,6 @@ public class AppFragment extends Fragment {
             view = inflater.inflate(R.layout.joke_page, null);
             TabLayout tab_joke = (TabLayout) view.findViewById(R.id.tab_joke);
             ViewPager vp_joke = (ViewPager) view.findViewById(R.id.vp_joke);
-            //tab_joke.setTabMode(MODE_SCROLLABLE);
             JokePagerAdapter jokePagerAdapter = new JokePagerAdapter(getFragmentManager(), view.getContext(), JokeUtil.getData());
             vp_joke.setAdapter(jokePagerAdapter);
             tab_joke.setupWithViewPager(vp_joke);
@@ -73,8 +72,8 @@ public class AppFragment extends Fragment {
         } else {
             view = inflater.inflate(R.layout.meitu_page, null);
             TabLayout tab_meitu = (TabLayout) view.findViewById(R.id.tab_meitu);
+            tab_meitu.setTabMode(MODE_SCROLLABLE);
             ViewPager vp_meitu = (ViewPager) view.findViewById(R.id.vp_meitu);
-            //tab_joke.setTabMode(MODE_SCROLLABLE);
             MeiTuPagerAdapter meiTuPagerAdapter = new MeiTuPagerAdapter(getFragmentManager(), view.getContext(), MeiTuUtil.getData());
             vp_meitu.setAdapter(meiTuPagerAdapter);
             tab_meitu.setupWithViewPager(vp_meitu);
